@@ -1,0 +1,16 @@
+
+#main{
+    min-height:400px;
+}
+.containBox{
+    padding: 10px;
+}
+.thumbnail img{
+}
+.thumbnail p{
+    position: absolute;
+    top:152px;
+    right:185px;
+    font-size: 2em;
+
+}

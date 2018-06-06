@@ -1,0 +1,121 @@
+body{
+    background-image: url("../img/WallPicture.jpg");
+    background-repeat:no-repeat;
+    background-position: top right;
+}
+.chengyuContainer h1{
+    position: absolute;
+    top:236px;
+    right:296px;
+    font-size:5.5em;
+}
+
+.chengyuContainer_in_clock h1{
+    position: absolute;
+    top:50px;
+    right:200px;
+    font-size:4em;
+}
+.nav{
+    position: absolute;
+    left:-40px;
+    top:100px;
+}
+.nav li{
+    width:50px;
+    border:1px solid black;
+    font-size:22px;
+    text-align: center;
+    -webkit-border-radius:0 10px 10px 0;
+    -moz-border-radius:0 10px 10px 0;
+    border-radius:0 10px 10px 0;
+    height:169px;
+    padding:12px 12px;
+
+}
+.nav li:hover{
+    background-color: #5bc0de;
+    cursor: pointer;
+    color: #ffffff;
+}
+.notChosen{
+    background-color: lightgray;
+}
+.chosen{
+    background-color: #5bc0de;
+    color: #ffffff;
+}
+.table-title{
+    text-align: center;
+    font-weight:bold;
+    font-size:30px;
+}
+tbody img{
+    height:30px;
+    float: right;
+}
+.countdown{
+    text-align: center;
+    margin-top:35px;
+
+}
+.countDown{
+    margin:auto;
+    font-weight:bold;
+    font-size:350px;
+    text-align: center;
+    height:532px;
+}
+.countDownFinish{
+    margin: auto;
+    font-weight: bold;
+    text-align: center;
+    font-size: 201px;
+    height: 532px;
+    padding-top: 120px;
+}
+.entrance{
+    padding:130px 67px;
+    text-align: center;
+    font-size:30px;
+}
+.questionEntryContainer{
+    height:140px;
+    padding:40px 40px;
+}
+.questionEntry{
+    background-color: #64df10;
+    padding:20px 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow:  1px 1px 16px grey;
+    -moz-box-shadow:  1px 1px 16px grey;
+    box-shadow:  1px 1px 16px grey;
+    cursor: pointer;
+}
+.back{
+    position: absolute;
+    bottom: 163px;
+    right: 200px;
+}
+.answer{
+    margin: auto;
+    float: right;
+    padding-top: 50px;
+    padding-right: 300px;
+    font-size: 30px;
+    color: red;
+}
+.questionBody{
+    text-align: center;
+    font-size: 40px;
+    margin: auto;
+    padding-top: 190px;
+    width: 640px;
+}
+.showAnswerBtn{
+    margin-right: 291px;
+    margin-top: 50px;
+    float: right;
+}

@@ -6,257 +6,13 @@
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/jquery.countdown.js"></script>
+    <script src="js/ppt.js"></script>
     <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/ppt.css" rel="stylesheet">
 
-    <style>
-        body{
-            background-image: url("img/WallPicture.jpg");
-            background-repeat:no-repeat;
-            background-position: top right;
-        }
-        .nav{
-            position: absolute;
-            left:-40px;
-            top:100px;
-        }
-        .nav li{
-            width:50px;
-            border:1px solid black;
-            font-size:22px;
-            text-align: center;
-            -webkit-border-radius:0 10px 10px 0;
-            -moz-border-radius:0 10px 10px 0;
-            border-radius:0 10px 10px 0;
-            height:169px;
-            padding:12px 12px;
-
-        }
-        .nav li:hover{
-            background-color: #5bc0de;
-            cursor: pointer;
-            color: #ffffff;
-        }
-        .notChosen{
-            background-color: lightgray;
-        }
-        .chosen{
-            background-color: #5bc0de;
-            color: #ffffff;
-        }
-        .table-title{
-            text-align: center;
-            font-weight:bold;
-            font-size:30px;
-        }
-        tbody img{
-            height:30px;
-            float: right;
-        }
-        .countdown{
-            text-align: center;
-            margin-top:35px;
-
-        }
-        .countDown{
-            margin:auto;
-            font-weight:bold;
-            font-size:400px;
-            text-align: center;
-            height:532px;
-        }
-        .countDownFinish{
-            margin: auto;
-            font-weight: bold;
-            text-align: center;
-            font-size: 201px;
-            height: 532px;
-            padding-top: 120px;
-        }
-        .entrance{
-            padding:130px 67px;
-            text-align: center;
-            font-size:30px;
-        }
-        .questionEntryContainer{
-            height:140px;
-            padding:40px 40px;
-        }
-        .questionEntry{
-            background-color: #64df10;
-            padding:20px 10px;
-            -webkit-border-radius: 10px;
-            -moz-border-radius: 10px;
-            border-radius: 10px;
-            -webkit-box-shadow:  1px 1px 16px grey;
-            -moz-box-shadow:  1px 1px 16px grey;
-            box-shadow:  1px 1px 16px grey;
-            cursor: pointer;
-        }
-        .back{
-            position: absolute;
-            bottom: 163px;
-            right: 200px;
-        }
-        .answer{
-            margin: auto;
-            float: right;
-            padding-top: 50px;
-            padding-right: 300px;
-            font-size: 30px;
-            color: red;
-        }
-        .questionBody{
-            text-align: center;
-            font-size: 40px;
-            margin: auto;
-            padding-top: 190px;
-            width: 640px;
-        }
-        .showAnswerBtn{
-            margin-right: 291px;
-            margin-top: 50px;
-            float: right;
-        }
-    </style>
-    
-    <script>
-
-        // 服务端ip为127.0.0.1
-        ws = new WebSocket("ws://127.0.0.1:1235");
-        ws.onopen = function() {
-
-        };
-        ws.onmessage = function(e) {
-            var data=eval("("+e.data+")");
-            if (data.getResponder==1){
-                document.getElementById("getResponder").play();
-            }
-        };
-
-        var clockMode=100;
-
-        function Clock() {
-            $("#clock").css("display","block");
-            $("#friendsHelp").css("display","none");
-            $("#rank").css("display","none");
-
-            $("#nav-clock").addClass("chosen");
-            $("#nav-friendsHelp").removeClass("chosen");
-            $("#nav-rank").removeClass("chosen");
-        }
-        
-        function FriendsHelp() {
-            $("#clock").css("display","none");
-            $("#friendsHelp").css("display","block");
-            $("#rank").css("display","none");
-
-            $("#nav-clock").removeClass("chosen").addClass("notChosen");
-            $("#nav-friendsHelp").addClass("chosen");
-            $("#nav-rank").removeClass("chosen");
-        }
-
-        function Rank() {
-            $("#clock").css("display","none");
-            $("#friendsHelp").css("display","none");
-            $("#rank").css("display","block");
-
-            $("#nav-clock").removeClass("chosen");
-            $("#nav-friendsHelp").removeClass("chosen");
-            $("#nav-rank").addClass("chosen");
-
-            $.post("getPPT.php",{
-                ask:"rank"
-            },function (data) {
-                console.log(data);
-                data=eval("("+data+")");
-                $("#rank-body").html(data.rankBody);
-            });
-        }
-
-        function startCountDown() {
-            $("#start").prop("disabled",true);
-            $("#reset").prop("disabled",true);
-            $("#countDown").removeClass("countDownFinish").addClass("countDown");
-            if (clockMode==60||clockMode==100){
-                document.getElementById("ready").play();
-            }else{
-                start();
-                $('#stop').prop('disabled',false);
-            }
-
-        }
-
-        function start() {
-            $('#countDown').countdown(new Date().getTime()+clockMode*1000)
-                .on('update.countdown', function(event) {
-                    var format = '%M:%S';
-                    $(this).html(event.strftime(format));
-                    if (event.offset.minutes==0&&event.offset.seconds<=5){
-                        document.getElementById('runningTime').play();
-                    }
-                })
-                .on('finish.countdown', function(event) {
-                    $(this).html('时间到！').removeClass("countDown").addClass("countDownFinish");
-                    document.getElementById('runningTime').load();
-                    document.getElementById('timesUp').play();
-                });
-        }
-
-        function stopCountDown() {
-            $("#start").prop("disabled",false);
-            $("#stop").prop("disabled",true);
-            $("#reset").prop("disabled",false);
-            $("#countDown").countdown('stop');
-            document.getElementById('runningTime').load();
-        }
-
-        function resetCountDown() {
-            if (clockMode==60){
-                $("#countDown").html("01:00").removeClass("countDownFinish").addClass("countDown");
-            }else if (clockMode==10){
-                $("#countDown").html("00:10").removeClass("countDownFinish").addClass("countDown");
-            }else if (clockMode==20){
-                $("#countDown").html("00:20").removeClass("countDownFinish").addClass("countDown");
-            }else if (clockMode==100){
-                $("#countDown").html("01:40").removeClass("countDownFinish").addClass("countDown");
-            }
-            $("#reset").prop("disabled",true);
-        }
-
-        function showQuestion(q) {
-            $(".entrance").css("display","none");
-            $("#q"+q).css("display","block");
-        }
-
-        function back() {
-            $(".question").css("display","none");
-            $(".entrance").css("display","block");
-        }
-
-        function clock1min() {
-            clockMode=60;
-            $("#countDown").html("01:00").removeClass("countDownFinish").addClass("countDown");
-        }
-
-        function clock10sec() {
-            clockMode=10;
-            $("#countDown").html("00:10").removeClass("countDownFinish").addClass("countDown");
-        }
-
-        function clock20sec() {
-            clockMode=20;
-            $("#countDown").html("00:20").removeClass("countDownFinish").addClass("countDown");
-        }
-
-        function clock1min40sec() {
-            clockMode=100;
-            $("#countDown").html("01:40").removeClass("countDownFinish").addClass("countDown");
-        }
-
-    </script>
 </head>
 <body>
-    <div class="nav">
+    <div class="nav" style="display: none">
         <ul type="none">
             <li style="padding-top:36px;" onclick="Clock();" id="nav-clock" class="notChosen chosen">计时器</li>
             <li style="padding-top:21px;" onclick="FriendsHelp();" id="nav-friendsHelp" class="notChosen">亲友助阵</li>
@@ -264,17 +20,24 @@
         </ul>
     </div>
     <div class="transparent">
-        <div class="container" style="margin: 0 50px;">
 
+        <div class="container" style="margin: 0 50px;">
+            <!--index-->
+            <div id='chengyubox' class="chengyuContainer">
+                <h1 id="chengyu">
+                    欢迎参赛
+                </h1>
+            </div>
             <!--计时器-->
-            <div id="clock" style="display: block;">
+            <div id="clock" style="display: none;">
                 <div class="countdown">
-                    <div id="mod">
+                    <div id="mod" style="display: none">
                         <button class="btn" onclick="clock1min40sec();">100秒</button>
                         <button class="btn" onclick="clock1min();">60秒</button>
                         <button class="btn" onclick="clock20sec();">20秒</button>
                         <button class="btn" onclick="clock10sec();">10秒</button>
                     </div>
+
                     <div id="countDown" class="countDown">01:40</div>
                     <div class="row">
                         <div class="col-sm-4 pull-left">

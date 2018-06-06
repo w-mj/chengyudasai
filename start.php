@@ -806,6 +806,7 @@ $client_worker->onWorkerStart=function ($client_worker) use ($chengyu1,$chengyu2
         echo "controller connection success!\n";
     };
     $control_worker->onMessage=function ($controller_connection,$data)use($client_worker,$chengyu1,$chengyu2,$chengyu3,$db,&$responder,&$clientView){
+        $raw_data = $data;
         $data=json_decode($data,true);
         if (isset($data['reset'])){
             if ($data['reset']=="client"){
@@ -819,6 +820,13 @@ $client_worker->onWorkerStart=function ($client_worker) use ($chengyu1,$chengyu2
                 return;
             }
         }
+
+        if (isset($data['cmd']) && $data['cmd'] == 'show_page') {
+            foreach ($client_worker->connections as $c)
+                $c->send($raw_data);
+            return;
+        }
+
         static $correctCount=0;
         static $i1=0;
         static $i2=0;
