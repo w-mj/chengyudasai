@@ -19,6 +19,11 @@ ws.onmessage = function(e) {
         else if (data.page === 'timer') Clock();
         else if (data.page === 'friend') FriendsHelp();
         else if (data.page === 'board') Rank();
+    } else if (data.cmd === 'start_timer') startCountDown();
+    else if (data.cmd === 'stop_timer') stopCountDown();
+    else if (data.cmd === 'reset_timer') {
+        clockMode = data.time;
+        resetCountDown();
     }
 };
 

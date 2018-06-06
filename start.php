@@ -821,7 +821,7 @@ $client_worker->onWorkerStart=function ($client_worker) use ($chengyu1,$chengyu2
             }
         }
 
-        if (isset($data['cmd']) && $data['cmd'] == 'show_page') {
+        if (isset($data['cmd'])) {
             foreach ($client_worker->connections as $c)
                 $c->send($raw_data);
             return;

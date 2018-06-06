@@ -43,9 +43,15 @@ function showPage(page) {
     ws.send(json)
 }
 
-function startTimer() {}
-function stopTimer() {}
+function startTimer() {
+    ws.send('{"cmd": "start_timer"}');
+}
+function stopTimer() {
+    ws.send('{"cmd": "stop_timer"}');
+
+}
 function resetTimer(time) {
+    ws.send('{"cmd": "reset_timer", "time":"'+time+'"}');
 }
 
 
