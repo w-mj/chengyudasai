@@ -1,0 +1,85 @@
+2018-06-06 02:57:56 pid:1 Error: Class 'Worker' not found in D:\MingjianW\Documents\chengyudasai\start.php:804
+Stack trace:
+#0 [internal function]: {closure}(Object(Workerman\Worker))
+#1 D:\MingjianW\Documents\chengyudasai\vendor\workerman\workerman\Worker.php(2214): call_user_func(Object(Closure), Object(Workerman\Worker))
+#2 D:\MingjianW\Documents\chengyudasai\vendor\workerman\workerman\Worker.php(1221): Workerman\Worker->run()
+#3 D:\MingjianW\Documents\chengyudasai\vendor\workerman\workerman\Worker.php(1164): Workerman\Worker::forkWorkersForWindows()
+#4 D:\MingjianW\Documents\chengyudasai\vendor\workerman\workerman\Worker.php(478): Workerman\Worker::forkWorkers()
+#5 D:\MingjianW\Documents\chengyudasai\start.php(1099): Workerman\Worker::runAll()
+#6 {main}
+2018-06-06 02:57:57 pid:1 Worker process terminated
+2018-06-06 03:10:48 pid:1 PDOException: SQL:UPDATE `sum` SET `part1` = :part1 WHERE name=:name SQLSTATE[42S02]: Base table or view not found: 1146 Table 'chengyu.sum' doesn't exist in D:\xampp\htdocs\chengyudasai\vendor\workerman\mysql\src\Connection.php:1772
+Stack trace:
+#0 D:\xampp\htdocs\chengyudasai\vendor\workerman\mysql\src\Connection.php(1830): Workerman\MySQL\Connection->execute('UPDATE `sum` SE...', Array)
+#1 D:\xampp\htdocs\chengyudasai\start.php(884): Workerman\MySQL\Connection->query()
+#2 [internal function]: {closure}(Object(Workerman\Connection\TcpConnection), Array)
+#3 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Connection\TcpConnection.php(645): call_user_func(Object(Closure), Object(Workerman\Connection\TcpConnection), '{"part":"part1"...')
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #27)
+#5 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Events\Select.php(289): call_user_func_array(Array, Array)
+#6 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Worker.php(2230): Workerman\Events\Select->loop()
+#7 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Worker.php(1221): Workerman\Worker->run()
+#8 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Worker.php(1164): Workerman\Worker::forkWorkersForWindows()
+#9 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Worker.php(478): Workerman\Worker::forkWorkers()
+#10 D:\xampp\htdocs\chengyudasai\start.php(1099): Workerman\Worker::runAll()
+#11 {main}
+2018-06-06 03:10:48 pid:1 Worker process terminated
+2018-06-06 04:25:50 pid:1 PDOException: SQL:UPDATE `sum` SET `part3` = :part3 WHERE name=:name SQLSTATE[42S02]: Base table or view not found: 1146 Table 'chengyu.sum' doesn't exist in D:\xampp\htdocs\chengyudasai\vendor\workerman\mysql\src\Connection.php:1772
+Stack trace:
+#0 D:\xampp\htdocs\chengyudasai\vendor\workerman\mysql\src\Connection.php(1830): Workerman\MySQL\Connection->execute('UPDATE `sum` SE...', Array)
+#1 D:\xampp\htdocs\chengyudasai\start.php(993): Workerman\MySQL\Connection->query()
+#2 [internal function]: {closure}(Object(Workerman\Connection\TcpConnection), Array)
+#3 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Connection\TcpConnection.php(645): call_user_func(Object(Closure), Object(Workerman\Connection\TcpConnection), '{"part":"part3"...')
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #27)
+#5 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Events\Select.php(289): call_user_func_array(Array, Array)
+#6 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Worker.php(2230): Workerman\Events\Select->loop()
+#7 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Worker.php(1221): Workerman\Worker->run()
+#8 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Worker.php(1164): Workerman\Worker::forkWorkersForWindows()
+#9 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Worker.php(478): Workerman\Worker::forkWorkers()
+#10 D:\xampp\htdocs\chengyudasai\start.php(1099): Workerman\Worker::runAll()
+#11 {main}
+2018-06-06 04:25:50 pid:1 Worker process terminated
+2018-06-06 04:50:12 pid:1 PDOException: SQL:UPDATE `sum` SET `part1` = :part1 WHERE name=:name SQLSTATE[42S02]: Base table or view not found: 1146 Table 'chengyu.sum' doesn't exist in D:\xampp\htdocs\chengyudasai\vendor\workerman\mysql\src\Connection.php:1772
+Stack trace:
+#0 D:\xampp\htdocs\chengyudasai\vendor\workerman\mysql\src\Connection.php(1830): Workerman\MySQL\Connection->execute('UPDATE `sum` SE...', Array)
+#1 D:\xampp\htdocs\chengyudasai\start.php(884): Workerman\MySQL\Connection->query()
+#2 [internal function]: {closure}(Object(Workerman\Connection\TcpConnection), Array)
+#3 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Connection\TcpConnection.php(645): call_user_func(Object(Closure), Object(Workerman\Connection\TcpConnection), '{"part":"part1"...')
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #27)
+#5 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Events\Select.php(289): call_user_func_array(Array, Array)
+#6 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Worker.php(2230): Workerman\Events\Select->loop()
+#7 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Worker.php(1221): Workerman\Worker->run()
+#8 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Worker.php(1164): Workerman\Worker::forkWorkersForWindows()
+#9 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Worker.php(478): Workerman\Worker::forkWorkers()
+#10 D:\xampp\htdocs\chengyudasai\start.php(1099): Workerman\Worker::runAll()
+#11 {main}
+2018-06-06 04:50:12 pid:1 Worker process terminated
+2018-06-06 08:21:43 pid:1 PDOException: SQL:UPDATE `sum` SET `part1` = :part1 WHERE name=:name SQLSTATE[42S02]: Base table or view not found: 1146 Table 'chengyu.sum' doesn't exist in D:\xampp\htdocs\chengyudasai\vendor\workerman\mysql\src\Connection.php:1772
+Stack trace:
+#0 D:\xampp\htdocs\chengyudasai\vendor\workerman\mysql\src\Connection.php(1830): Workerman\MySQL\Connection->execute('UPDATE `sum` SE...', Array)
+#1 D:\xampp\htdocs\chengyudasai\start.php(884): Workerman\MySQL\Connection->query()
+#2 [internal function]: {closure}(Object(Workerman\Connection\TcpConnection), Array)
+#3 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Connection\TcpConnection.php(645): call_user_func(Object(Closure), Object(Workerman\Connection\TcpConnection), '{"part":"part1"...')
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #27)
+#5 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Events\Select.php(289): call_user_func_array(Array, Array)
+#6 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Worker.php(2230): Workerman\Events\Select->loop()
+#7 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Worker.php(1221): Workerman\Worker->run()
+#8 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Worker.php(1164): Workerman\Worker::forkWorkersForWindows()
+#9 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Worker.php(478): Workerman\Worker::forkWorkers()
+#10 D:\xampp\htdocs\chengyudasai\start.php(1099): Workerman\Worker::runAll()
+#11 {main}
+2018-06-06 08:21:43 pid:1 Worker process terminated
+2018-06-06 08:24:23 pid:1 PDOException: SQL:UPDATE `sum` SET `part1` = :part1 WHERE name=:name SQLSTATE[42S22]: Column not found: 1054 Unknown column 'part1' in 'field list' in D:\xampp\htdocs\chengyudasai\vendor\workerman\mysql\src\Connection.php:1772
+Stack trace:
+#0 D:\xampp\htdocs\chengyudasai\vendor\workerman\mysql\src\Connection.php(1830): Workerman\MySQL\Connection->execute('UPDATE `sum` SE...', Array)
+#1 D:\xampp\htdocs\chengyudasai\start.php(884): Workerman\MySQL\Connection->query()
+#2 [internal function]: {closure}(Object(Workerman\Connection\TcpConnection), Array)
+#3 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Connection\TcpConnection.php(645): call_user_func(Object(Closure), Object(Workerman\Connection\TcpConnection), '{"part":"part1"...')
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #24)
+#5 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Events\Select.php(289): call_user_func_array(Array, Array)
+#6 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Worker.php(2230): Workerman\Events\Select->loop()
+#7 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Worker.php(1221): Workerman\Worker->run()
+#8 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Worker.php(1164): Workerman\Worker::forkWorkersForWindows()
+#9 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Worker.php(478): Workerman\Worker::forkWorkers()
+#10 D:\xampp\htdocs\chengyudasai\start.php(1099): Workerman\Worker::runAll()
+#11 {main}
+2018-06-06 08:24:23 pid:1 Worker process terminated

@@ -5,9 +5,10 @@
  * Date: 2017/3/15
  * Time: 22:55
  */
-use Workerman\Worker;
-require_once __DIR__ . '/Workerman/Autoloader.php';
-require_once __DIR__.'/mysql/src/Connection.php';
+#use Workerman\Worker;
+require 'vendor/autoload.php';
+#require_once __DIR__ . '/Workerman/Autoloader.php';
+#require_once __DIR__.'/mysql/src/Connection.php';
 
 $chengyu1=array(            //存储成语的数组
     '图穷匕首',
@@ -767,7 +768,7 @@ $chengyu3=array(
 
 
 //全局变量获取数据库
-$db = new Workerman\MySQL\Connection('localhost', '3306', 'root', 'backto', 'chengyu');//本机为3306端口
+$db = new Workerman\MySQL\Connection('localhost', '3306', 'chengyu', 'chengyu', 'chengyu');//本机为3306端口
 
 //抢答器变量
 $responder=0;
@@ -777,7 +778,7 @@ $clientView['page']=1;//1为显示成语，2为显示抢答器
 $clientView['chengyu']="欢迎参赛";
 
 // 创建一个Worker监听端口,使用websocket协议通讯
-$client_worker = new Worker("websocket://192.168.1.101:1235");//处理与客户端的长连接
+$client_worker = new Workerman\Worker("websocket://127.0.0.1:1235");//处理与客户端的长连接
 $client_worker->count=1;                            //启动1个进程
 $client_worker->onConnect=function ($connection)use(&$clientView){
     echo "client connection success!\n";
@@ -800,7 +801,7 @@ $client_worker->onMessage=function ($connection,$data)use(&$responder,$client_wo
     }
 };
 $client_worker->onWorkerStart=function ($client_worker) use ($chengyu1,$chengyu2,$chengyu3,$db,&$responder,&$clientView){
-    $control_worker=new Worker("websocket://192.168.1.101:1234");   //处理与控制台的长连接
+    $control_worker=new Workerman\Worker("websocket://127.0.0.1:1234");   //处理与控制台的长连接
     $control_worker->onConnect=function ($connection){
         echo "controller connection success!\n";
     };
@@ -1095,5 +1096,5 @@ $client_worker->onWorkerStart=function ($client_worker) use ($chengyu1,$chengyu2
 };
 
 // 运行worker
-Worker::runAll();
+Workerman\Worker::runAll();
 ?>

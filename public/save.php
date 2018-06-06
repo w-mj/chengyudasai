@@ -12,7 +12,7 @@ if (isset($_POST['part'])&&isset($_POST['group'])&&isset($_POST['score'])){
     $score=$_POST['score'];
 
     try{
-        $db=new PDO("mysql:host=localhost;dbname=chengyu","root","backto");
+        $db=new PDO("mysql:host=localhost;dbname=chengyu","chengyu","chengyu");
     }catch(PDOException $e){
         echo json_encode(array('error'=>"database: connection failure<br>"));
         exit(1);

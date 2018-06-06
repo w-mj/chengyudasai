@@ -121,8 +121,8 @@
     
     <script>
 
-        // 服务端ip为192.168.1.101
-        ws = new WebSocket("ws://192.168.1.101:1235");
+        // 服务端ip为127.0.0.1
+        ws = new WebSocket("ws://127.0.0.1:1235");
         ws.onopen = function() {
 
         };
@@ -167,6 +167,7 @@
             $.post("getPPT.php",{
                 ask:"rank"
             },function (data) {
+                console.log(data);
                 data=eval("("+data+")");
                 $("#rank-body").html(data.rankBody);
             });
@@ -280,7 +281,7 @@
                             <button class="btn btn-warning" id="reset" onclick="resetCountDown();" disabled>&nbsp;&nbsp;&nbsp;&nbsp;复位&nbsp;&nbsp;&nbsp;&nbsp;</button>
                         </div>
                         <div class="col-sm-4" style="text-align: center;">
-                            <button class="btn btn-success" id="start" onclick="startCountDown();">&nbsp;&nbsp;&nbsp;&nbsp;开始&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                            <button class="btn btn-success" id="start" onclick="startCountDown();">&nbsp;&nbsp;&nbsp;&nbsp;开始 &nbsp;&nbsp;&nbsp;&nbsp;</button>
                         </div>
                         <div class="col-sm-4 pull-right">
                             <button class="btn btn-danger" id="stop" onclick="stopCountDown();" disabled>&nbsp;&nbsp;&nbsp;&nbsp;停止&nbsp;&nbsp;&nbsp;&nbsp;</button>
