@@ -39,7 +39,7 @@
                     </div>
 
                     <div id="countDown" class="countDown">01:40</div>
-                    <div class="row">
+                    <div class="row panel">
                         <div class="col-sm-4 pull-left">
                             <button class="btn btn-warning" id="reset" onclick="resetCountDown();" disabled>&nbsp;&nbsp;&nbsp;&nbsp;复位&nbsp;&nbsp;&nbsp;&nbsp;</button>
                         </div>
@@ -59,144 +59,73 @@
                     <h2>选择一道题目</h2>
                     <div class="row">
                         <div class="col-sm-3 questionEntryContainer">
-                            <div class="questionEntry" onclick="showQuestion(1)">
+                            <div class="questionEntry mark-low" onclick="showQuestion(1)">
                                 <span>1</span>
                             </div>
                         </div>
                         <div class="col-sm-3 questionEntryContainer">
-                            <div class="questionEntry" onclick="showQuestion(2)">
+                            <div class="questionEntry mark-low" onclick="showQuestion(2)">
                                 <span>2</span>
                             </div>
                         </div>
                         <div class="col-sm-3 questionEntryContainer">
-                            <div class="questionEntry" onclick="showQuestion(3)">
+                            <div class="questionEntry mark-low" onclick="showQuestion(3)">
                                 <span>3</span>
                             </div>
                         </div>
                         <div class="col-sm-3 questionEntryContainer">
-                            <div class="questionEntry" onclick="showQuestion(4)">
+                            <div class="questionEntry mark-low" onclick="showQuestion(4)">
                                 <span>4</span>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-3 questionEntryContainer">
-                            <div class="questionEntry" onclick="showQuestion(5)">
+                            <div class="questionEntry mark-middle" onclick="showQuestion(5)">
                                 <span>5</span>
                             </div>
                         </div>
                         <div class="col-sm-3 questionEntryContainer">
-                            <div class="questionEntry" onclick="showQuestion(6)">
+                            <div class="questionEntry mark-middle" onclick="showQuestion(6)">
                                 <span>6</span>
                             </div>
                         </div>
                         <div class="col-sm-3 questionEntryContainer">
-                            <div class="questionEntry" onclick="showQuestion(7)">
+                            <div class="questionEntry mark-middle" onclick="showQuestion(7)">
                                 <span>7</span>
                             </div>
                         </div>
                         <div class="col-sm-3 questionEntryContainer">
-                            <div class="questionEntry" onclick="showQuestion(8)">
+                            <div class="questionEntry mark-middle" onclick="showQuestion(8)">
                                 <span>8</span>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-3 questionEntryContainer">
-                            <div class="questionEntry" onclick="showQuestion(9)">
+                            <div class="questionEntry mark-high" onclick="showQuestion(9)">
                                 <span>9</span>
                             </div>
                         </div>
                         <div class="col-sm-3 questionEntryContainer">
-                            <div class="questionEntry" onclick="showQuestion(10)">
+                            <div class="questionEntry mark-high" onclick="showQuestion(10)">
                                 <span>10</span>
                             </div>
                         </div>
                         <div class="col-sm-3 questionEntryContainer">
-                            <div class="questionEntry" onclick="showQuestion(11)">
+                            <div class="questionEntry mark-high" onclick="showQuestion(11)">
                                 <span>11</span>
                             </div>
                         </div>
                         <div class="col-sm-3 questionEntryContainer">
-                            <div class="questionEntry" onclick="showQuestion(12)">
+                            <div class="questionEntry mark-high" onclick="showQuestion(12)">
                                 <span>12</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="questions">
-                    <div class="question" id="q1" style="display: none;">
-                       <div class="questionBody">山重水复疑无路，柳暗花明又一村</div>
-                        <button class="btn btn-primary showAnswerBtn" value="1">显示答案</button>
-                        <div class="answer" style="display: none;">答案：绝处逢生</div>
-                        <button class="btn btn-primary back" onclick="back();" ><span class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回</button>
-                    </div>
-                    <div class="question" id="q2" style="display: none;">
-                        <div class="questionBody">《庄子·天运》:“故西施病心而矉其里，其里之丑人见而美之，归亦捧心而矉其里。其里之富人见之，坚闭门而不出；贫人见之，絜妻子而去之走。”</div>
-                        <button class="btn btn-primary showAnswerBtn" value="1">显示答案</button>
-                        <div class="answer" style="display: none;">答案：东施效颦</div>
-                        <button class="btn btn-primary back" onclick="back();" ><span class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回</button>
-                    </div>
-                    <div class="question" id="q3" style="display: none;">
-                        <div class="questionBody">欲穷千里目，更上一城楼</div>
-                        <button class="btn btn-primary showAnswerBtn" value="1">显示答案</button>
-                        <div class="answer" style="display: none;">答案：高瞻远瞩</div>
-                        <button class="btn btn-primary back" onclick="back();" ><span class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回</button>
-                    </div>
-                    <div class="question" id="q4" style="display: none;">
-                        <div class="questionBody">汉·赵晔《吴越春秋·勾践入臣外传》：“时过于期；否终则泰。”</div>
-                        <button class="btn btn-primary showAnswerBtn" value="1">显示答案</button>
-                        <div class="answer" style="display: none;">答案：否极泰来</div>
-                        <button class="btn btn-primary back" onclick="back();" ><span class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回</button>
-                    </div>
-                    <div class="question" id="q5" style="display: none;">
-                        <div class="questionBody">《后汉书·杜密传》：“刘胜位为大夫，见礼上宾，而知善不荐，闻恶无言，隐情惜己，自同寒蝉，此罪人也。”</div>
-                        <button class="btn btn-primary showAnswerBtn" value="1">显示答案</button>
-                        <div class="answer" style="display: none;">答案：噤若寒蝉</div>
-                        <button class="btn btn-primary back" onclick="back();" ><span class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回</button>
-                    </div>
-                    <div class="question" id="q6" style="display: none;">
-                        <div class="questionBody">金河一去路千千，欲到天边更有天</div>
-                        <button class="btn btn-primary showAnswerBtn" value="1">显示答案</button>
-                        <div class="answer" style="display: none;">答案：天外有天</div>
-                        <button class="btn btn-primary back" onclick="back();" ><span class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回</button>
-                    </div>
-                    <div class="question" id="q7" style="display: none;">
-                        <div class="questionBody">《枕中记》记载：有个卢生在一个店里向一道士诉说自己的贫困；道士送给他一个枕头；他枕上去就睡着了；做梦享尽了荣华富贵。这时店主人煮上一锅小米饭；卢生一梦醒来；小米饭还未煮熟。</div>
-                        <button class="btn btn-primary showAnswerBtn" value="1">显示答案</button>
-                        <div class="answer" style="display: none;">答案：黄粱美梦</div>
-                        <button class="btn btn-primary back" onclick="back();" ><span class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回</button>
-                    </div>
-                    <div class="question" id="q8" style="display: none;">
-                        <div class="questionBody">《庄子·秋水》：“据说；河神因河水大涨而自以为了不起。后来到了海边；看到无边无际的大洋；于是望洋向若而叹。”</div>
-                        <button class="btn btn-primary showAnswerBtn" value="1">显示答案</button>
-                        <div class="answer" style="display: none;">答案：望洋兴叹</div>
-                        <button class="btn btn-primary back" onclick="back();" ><span class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回</button>
-                    </div>
-                    <div class="question" id="q9" style="display: none;">
-                        <div class="questionBody">《汉书·贾谊传》：“鼠近于器；尚惮不投；恐伤其器；况于贵臣之近主乎！”</div>
-                        <button class="btn btn-primary showAnswerBtn" value="1">显示答案</button>
-                        <div class="answer" style="display: none;">答案：投鼠忌器</div>
-                        <button class="btn btn-primary back" onclick="back();" ><span class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回</button>
-                    </div>
-                    <div class="question" id="q10" style="display: none;">
-                        <div class="questionBody">出自《南齐书·礼志上·晋傅玄朝会赋》，大多用来形容张灯结彩或大放焰火的灿烂夜景。</div>
-                        <button class="btn btn-primary showAnswerBtn" value="1">显示答案</button>
-                        <div class="answer" style="display: none;">答案：火树银花</div>
-                        <button class="btn btn-primary back" onclick="back();" ><span class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回</button>
-                    </div>
-                    <div class="question" id="q11" style="display: none;">
-                        <div class="questionBody">西汉·戴圣《礼记·大学》：“富润屋，德润身，心广体胖。”</div>
-                        <button class="btn btn-primary showAnswerBtn" value="1">显示答案</button>
-                        <div class="answer" style="display: none;">答案：心宽体胖</div>
-                        <button class="btn btn-primary back" onclick="back();" ><span class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回</button>
-                    </div>
-                    <div class="question" id="q12" style="display: none;">
-                        <div class="questionBody">出自唐·韩愈《进学解》：“障百川而东之，回狂澜于既倒。”</div>
-                        <button class="btn btn-primary showAnswerBtn" value="1">显示答案</button>
-                        <div class="answer" style="display: none;">答案：力挽狂澜</div>
-                        <button class="btn btn-primary back" onclick="back();" ><span class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回</button>
-                    </div>
+                <div class="questions" id="questions">
+
                 </div>
             </div>
 

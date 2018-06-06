@@ -1,5 +1,5 @@
 
-
+let part = '1';
 
 var ws=new WebSocket("ws://127.0.0.1:1234");
 ws.onmessage=function (e) {
@@ -8,7 +8,7 @@ ws.onmessage=function (e) {
     {
         $(".thumbnail").children("p").html(data.chengyu);
     }
-    if (data.part==="part1"){
+    if (data.part==="part1" || data.part==="part2"){
         if (data.msg!==undefined){
             $("#part1-msg").append(data.msg);
         }
@@ -54,6 +54,10 @@ function resetTimer(time) {
     ws.send('{"cmd": "reset_timer", "time":"'+time+'"}');
 }
 
+function showTimerChengyu() {
+    ws.send('{"cmd": "show_timercy"}');
+}
+
 
 $(".part2-result").children(".result").children("label").children("input").click(function () {
     if ($(this).is(":checked")) {
@@ -76,6 +80,8 @@ $(".part4-result").children(".result").children("label").children("input").click
  * 切换至主页
  */
 function home() {
+    part = 'home';
+    showPage('index');
     $("ul li").removeClass("active");
     $("#nav-home").addClass("active");
 
@@ -92,6 +98,9 @@ function home() {
  * 切换至第一关
  */
 function part1() {
+    part = 'part1';
+    showPage('index');
+
     $("ul li").removeClass("active");
     $("#nav-part1").addClass("active");
 
@@ -101,29 +110,36 @@ function part1() {
     $("#extraPart").css("display","none");
     $("#part3").css("display","none");
     $("#part4").css("display","none");
-
-
+    $("#part1-start").show();
+    $("#part2-start").hide();
 }
 
 /**
  * 切换至第二关
  */
 function part2() {
+    part = 'part2';
+    showPage('timer');
+
     $("ul li").removeClass("active");
     $("#nav-part2").addClass("active");
 
     $("#home").css("display","none");
-    $("#part1").css("display","none");
-    $("#part2").css("display","block");
+    $("#part1").css("display","block");
+    $("#part2").css("display","none");
     $("#extraPart").css("display","none");
     $("#part3").css("display","none");
     $("#part4").css("display","none");
+    $("#part1-start").hide();
+    $("#part2-start").show();
 }
 
 /**
  * 切换至亲友助阵
  */
 function extraPart() {
+    part = 'extraPart';
+    showPage('friend');
     $("ul li").removeClass("active");
     $("#nav-extraPart").addClass("active");
 
@@ -139,6 +155,7 @@ function extraPart() {
  * 切换至第三关
  */
 function part3(){
+    part = 'part3';
     $("ul li").removeClass("active");
     $("#nav-part3").addClass("active");
 
@@ -154,6 +171,8 @@ function part3(){
  * 切换至第四关
  */
 function part4() {
+    part = 'part4';
+    showPage('part4');
     $("ul li").removeClass("active");
     $("#nav-part4").addClass("active");
 
@@ -171,9 +190,9 @@ function part4() {
 function Part1Action(action){
     var group=$("#part1-group").val();
     var data={
-        part:"part1",
+        part: part,
         group:group,
-        act:action
+        act: action
     };
     ws.send(JSON.stringify(data));
 }
@@ -185,12 +204,11 @@ function Part1Start(){
     var select=$("#part1-group");
     var group=select.val();
     var data={
-        part:"part1",
+        part:part,
         group:group,
         act:"start"
     };
     ws.send(JSON.stringify(data));
-
     select.attr("disabled",true);
     $("#part1-btn").children("button").attr("disabled",false);
     $("#part1-end").attr("disabled",false);
@@ -204,7 +222,7 @@ function Part1End() {
     var select=$("#part1-group");
     var group=select.val();
     var data={
-        part:"part1",
+        part:part,
         group:group,
         act:"end"
     };
@@ -216,9 +234,16 @@ function Part1End() {
     $("#part1-start").attr("disabled",false);
 }
 
+function Part2Start() {
+    showPage('timer');
+    resetTimer(40);
+    startTimer();
+    Part1Start();
+}
+
 /**
  * 第二关，提交成绩
- */
+
 function Part2Submit() {
     var groupOneSelect=$("select[name=part2-groupOne]");
     var groupTwoSelect=$("select[name=part2-groupTwo]");
@@ -382,83 +407,24 @@ function Part3End() {
 /**
  * 第四关，提交成绩
  */
-function Part4Submit() {
+function Part4Submit(mark) {
     var groupOneSelect=$("select[name=part4-groupOne]");
-    var groupTwoSelect=$("select[name=part4-groupTwo]")
 
     var groupOne=groupOneSelect.val();
-    var groupTwo=groupTwoSelect.val();
 
-    if (groupOne==""||groupTwo==""){
-        $("#alrt").html("请选择两个组后，再提交");
+    if (groupOne==""){
+        $("#alrt").html("请选择一个组");
         $("#alertModal").modal('show');
         return;
     }
-    if (groupOne==groupTwo){
-        $("#alrt").html("两个组不能选成一样的");
-        $("#alertModal").modal('show');
-        return;
-    }
-
-    var groupOneCount=0;
-    var groupTwoCount=0;
-
-    if ($("input[name=part4-q1-groupOne-win]").is(":checked")){
-        groupOneCount++;
-    }
-    if ($("input[name=part4-q1-groupTwo-win]").is(":checked")){
-        groupTwoCount++;
-    }
-
-    if ($("input[name=part4-q2-groupOne-win]").is(":checked")){
-        groupOneCount++;
-    }
-    if ($("input[name=part4-q2-groupTwo-win]").is(":checked")){
-        groupTwoCount++;
-    }
-
-    if ($("input[name=part4-q3-groupOne-win]").is(":checked")){
-        groupOneCount++;
-    }
-    if ($("input[name=part4-q3-groupTwo-win]").is(":checked")){
-        groupTwoCount++;
-    }
-
-    if ($("input[name=part4-q4-groupOne-win]").is(":checked")){
-        groupOneCount++;
-    }
-    if ($("input[name=part4-q4-groupTwo-win]").is(":checked")){
-        groupTwoCount++;
-    }
-
-    if ($("input[name=part4-q5-groupOne-win]").is(":checked")){
-        groupOneCount++;
-    }
-    if ($("input[name=part4-q5-groupTwo-win]").is(":checked")){
-        groupTwoCount++;
-    }
-
 
     var success=1;
     $.post("save.php",{
         part:"part4",
         group:groupOne,
-        score:groupOneCount
+        score:mark
     },function (data) {
-        data=eval("("+data+")");
-        if (data.msg!==undefined){
-            $("#part4-msg").append(data.msg);
-        }
-        if (data.error!==undefined){
-            $("#part4-msg").append(data.error);
-            success=0;
-        }
-    });
-    $.post("save.php",{
-        part:"part4",
-        group:groupTwo,
-        score:groupTwoCount
-    },function (data) {
+        console.log(data);
         data=eval("("+data+")");
         if (data.msg!==undefined){
             $("#part4-msg").append(data.msg);
@@ -471,9 +437,7 @@ function Part4Submit() {
 
     if (success){
         groupOneSelect.children("option").prop("selected",false);
-        groupTwoSelect.children("option").prop("selected",false);
         groupOneSelect.children(".part4-select-default").prop("selected",true);
-        groupTwoSelect.children(".part4-select-default").prop("selected",true);
         $("input[type=checkbox]").prop("checked",false);
     }
 }

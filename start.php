@@ -462,10 +462,10 @@ $chengyu2=array(
 );
 
 $chengyu3=array(
-    '黄粱美梦',
-    '火中取栗',
-    '债台高筑',
-    '寿陵失步',
+    '黄',
+    '火',
+    '债',
+    '寿',
     '寸木岑楼',
     '一饭之德',
     '作威作福',
@@ -766,6 +766,35 @@ $chengyu3=array(
     '沆瀣一气'
 );
 
+$chengyue=array(
+    array("1山重水复疑无路，柳暗花明又一村1", "绝处逢生"),
+    array("2《庄子·天运》:“故西施病心而矉其里，其里之丑人见而美之，归亦捧心而矉其里。其里之富人见之，坚闭门而不出；贫人见之，絜妻子而去之走。", "东施效颦"),
+    array("3山重水复疑无路，柳暗花明又一村", "绝处逢生"),
+    array("4《庄子·天运》:“故西施病心而矉其里，其里之丑人见而美之，归亦捧心而矉其里。其里之富人见之，坚闭门而不出；贫人见之，絜妻子而去之走。", "东施效颦"),
+    array("5山重水复疑无路，柳暗花明又一村", "绝处逢生"),
+    array("6《庄子·天运》:“故西施病心而矉其里，其里之丑人见而美之，归亦捧心而矉其里。其里之富人见之，坚闭门而不出；贫人见之，絜妻子而去之走。", "东施效颦"),
+    array("7山重水复疑无路，柳暗花明又一村", "绝处逢生"),
+    array("8《庄子·天运》:“故西施病心而矉其里，其里之丑人见而美之，归亦捧心而矉其里。其里之富人见之，坚闭门而不出；贫人见之，絜妻子而去之走。", "东施效颦"),
+    array("9山重水复疑无路，柳暗花明又一村", "绝处逢生"),
+    array("10《庄子·天运》:“故西施病心而矉其里，其里之丑人见而美之，归亦捧心而矉其里。其里之富人见之，坚闭门而不出；贫人见之，絜妻子而去之走。", "东施效颦"),
+    array("11山重水复疑无路，柳暗花明又一村", "绝处逢生"),
+    array("12《庄子·天运》:“故西施病心而矉其里，其里之丑人见而美之，归亦捧心而矉其里。其里之富人见之，坚闭门而不出；贫人见之，絜妻子而去之走。", "东施效颦"),
+);
+
+$chengyu4=array(
+    array("1《庄子·天运》:“故西施病心而矉其里，其里之丑人见而美之，归亦捧心而矉其里。其里之富人见之，坚闭门而不出；贫人见之，絜妻子而去之走。", "东施效颦"),
+    array("2山重水复疑无路，柳暗花明又一村", "绝处逢生"),
+    array("3《庄子·天运》:“故西施病心而矉其里，其里之丑人见而美之，归亦捧心而矉其里。其里之富人见之，坚闭门而不出；贫人见之，絜妻子而去之走。", "东施效颦"),
+    array("4山重水复疑无路，柳暗花明又一村", "绝处逢生"),
+    array("5《庄子·天运》:“故西施病心而矉其里，其里之丑人见而美之，归亦捧心而矉其里。其里之富人见之，坚闭门而不出；贫人见之，絜妻子而去之走。", "东施效颦"),
+    array("6山重水复疑无路，柳暗花明又一村", "绝处逢生"),
+    array("7《庄子·天运》:“故西施病心而矉其里，其里之丑人见而美之，归亦捧心而矉其里。其里之富人见之，坚闭门而不出；贫人见之，絜妻子而去之走。", "东施效颦"),
+    array("8山重水复疑无路，柳暗花明又一村", "绝处逢生"),
+    array("9《庄子·天运》:“故西施病心而矉其里，其里之丑人见而美之，归亦捧心而矉其里。其里之富人见之，坚闭门而不出；贫人见之，絜妻子而去之走。", "东施效颦"),
+    array("10山重水复疑无路，柳暗花明又一村", "绝处逢生"),
+    array("11《庄子·天运》:“故西施病心而矉其里，其里之丑人见而美之，归亦捧心而矉其里。其里之富人见之，坚闭门而不出；贫人见之，絜妻子而去之走。", "东施效颦"),
+    array("12山重水复疑无路，柳暗花明又一村", "绝处逢生"),
+);
 
 //全局变量获取数据库
 $db = new Workerman\MySQL\Connection('localhost', '3306', 'chengyu', 'chengyu', 'chengyu');//本机为3306端口
@@ -800,12 +829,14 @@ $client_worker->onMessage=function ($connection,$data)use(&$responder,$client_wo
         }
     }
 };
-$client_worker->onWorkerStart=function ($client_worker) use ($chengyu1,$chengyu2,$chengyu3,$db,&$responder,&$clientView){
+$client_worker->onWorkerStart=function ($client_worker) use ($chengyu1,$chengyu2,$chengyu3,$chengyue, $chengyu4,
+    $db,&$responder,&$clientView){
     $control_worker=new Workerman\Worker("websocket://127.0.0.1:1234");   //处理与控制台的长连接
     $control_worker->onConnect=function ($connection){
         echo "controller connection success!\n";
     };
-    $control_worker->onMessage=function ($controller_connection,$data)use($client_worker,$chengyu1,$chengyu2,$chengyu3,$db,&$responder,&$clientView){
+    $control_worker->onMessage=function ($controller_connection,$data)use($client_worker,$chengyu1,$chengyu2,$chengyu3,
+        $chengyue, $chengyu4, $db,&$responder,&$clientView){
         $raw_data = $data;
         $data=json_decode($data,true);
         if (isset($data['reset'])){
@@ -824,6 +855,12 @@ $client_worker->onWorkerStart=function ($client_worker) use ($chengyu1,$chengyu2
         if (isset($data['cmd'])) {
             foreach ($client_worker->connections as $c)
                 $c->send($raw_data);
+            if ($data['cmd'] == 'show_page' && $data['page'] == 'friend')
+                foreach ($client_worker->connections as $c)
+                    $c->send(json_encode(array('cmd'=>'set_extra_questions', 'data'=>$chengyue)));
+            else if ($data['cmd'] == 'show_page' && $data['page'] == 'part4')
+                foreach ($client_worker->connections as $c)
+                    $c->send(json_encode(array('cmd'=>'set_extra_questions', 'data'=>$chengyu4)));
             return;
         }
 
@@ -846,6 +883,21 @@ $client_worker->onWorkerStart=function ($client_worker) use ($chengyu1,$chengyu2
             'group12'=>array('breakLaw'=>0,'skip'=>0),
             'extraGroup'=>array('breakLaw'=>0,'skip'=>0)
             );
+        static $cache2=array(
+            'group1'=>array('breakLaw'=>0,'skip'=>0),
+            'group2'=>array('breakLaw'=>0,'skip'=>0),
+            'group3'=>array('breakLaw'=>0,'skip'=>0),
+            'group4'=>array('breakLaw'=>0,'skip'=>0),
+            'group5'=>array('breakLaw'=>0,'skip'=>0),
+            'group6'=>array('breakLaw'=>0,'skip'=>0),
+            'group7'=>array('breakLaw'=>0,'skip'=>0),
+            'group8'=>array('breakLaw'=>0,'skip'=>0),
+            'group9'=>array('breakLaw'=>0,'skip'=>0),
+            'group10'=>array('breakLaw'=>0,'skip'=>0),
+            'group11'=>array('breakLaw'=>0,'skip'=>0),
+            'group12'=>array('breakLaw'=>0,'skip'=>0),
+            'extraGroup'=>array('breakLaw'=>0,'skip'=>0)
+        );
         static $cache3=array(
             'group1'=>array('breakLaw'=>0,'skip'=>0),
             'group2'=>array('breakLaw'=>0,'skip'=>0),
@@ -863,7 +915,11 @@ $client_worker->onWorkerStart=function ($client_worker) use ($chengyu1,$chengyu2
         );
 
         //控制台行为
-        if ($data['part']=="part1"){            //第一关
+        if ($data['part']=="part1" || $data['part']=="part2"){            //第一、二关
+            if ($data['part'] == "part1")
+                $cache = &$cache1;
+            else
+                $cache = &$cache2;
             if ($data['act']=="showChengyu"){
                 echo $data['act']."\n";
                 $clientView['page']=1;
@@ -872,8 +928,8 @@ $client_worker->onWorkerStart=function ($client_worker) use ($chengyu1,$chengyu2
                 }
                 return;
             }
-            $response['part']="part1";
-            echo "part1\n";
+            $response['part']=$data['part'];
+            echo $data['part']."\n";
             echo "{$data['group']}: {$data['act']}\n";
             $response['msg']="";
             $response['msg'].="{$data['group']}: {$data['act']} <br>";
@@ -889,7 +945,7 @@ $client_worker->onWorkerStart=function ($client_worker) use ($chengyu1,$chengyu2
                     $controller_connection->send(json_encode($response));
                     return;
                 }
-                $row_count = $db->update('sum')->cols(array('part1'=>$correctCount))->where('name=:name')->bindValues(array('name'=>$data['group']))->query();
+                $row_count = $db->update('sum')->cols(array($data['part']=>$correctCount))->where('name=:name')->bindValues(array('name'=>$data['group']))->query();
                 if ($row_count>0){
                     $response['msg'].="{$data['group']}: 保存成绩成功<br>";
                 }else{
@@ -903,10 +959,13 @@ $client_worker->onWorkerStart=function ($client_worker) use ($chengyu1,$chengyu2
                 $controller_connection->send(json_encode($response));
                 return;
             }elseif ($data['act']=="start"){                                            //该组回合开始
-                $cache1[$data['group']]['breakLaw']=0;
-                $cache1[$data['group']]['skip']=0;
+                $cache[$data['group']]['breakLaw']=0;
+                $cache[$data['group']]['skip']=0;
                 $correctCount=0;
-                $chengyu=$chengyu1[++$i1];
+                if ($data['part'] == 'part1')
+                    $chengyu=$chengyu1[++$i1];
+                else
+                    $chengyu=$chengyu2[++$i2];
                 $response['chengyu']=$chengyu;
                 $clientView['chengyu']=$chengyu;
                 foreach ($client_worker->connections as $connection) {
@@ -915,14 +974,14 @@ $client_worker->onWorkerStart=function ($client_worker) use ($chengyu1,$chengyu2
                 $controller_connection->send(json_encode($response));
                 return;
             }
-            if ($cache1[$data['group']]['breakLaw']>1){
+            if ($cache[$data['group']]['breakLaw']>1){
                 $response['alrt']="{$data['group']} 犯规数已经达到两次,该回合结束";
                 $controller_connection->send(json_encode($response));
                 return;
             }
 
-            if ($cache1[$data['group']]['breakLaw']==1&&$data['act']=="breakLaw"){       //犯规, 但已经超过次数
-                $cache1[$data['group']][$data['act']]++;
+            if ($cache[$data['group']]['breakLaw']==1&&$data['act']=="breakLaw"){       //犯规, 但已经超过次数
+                $cache[$data['group']][$data['act']]++;
                 $response['msg'].="{$data['group']}: die for Break Law<br>";
                 echo "{$data['group']}: die for Break Law\n";
                 $response['alrt']="{$data['group']} 犯规达到两次,回合结束";
@@ -933,7 +992,7 @@ $client_worker->onWorkerStart=function ($client_worker) use ($chengyu1,$chengyu2
                 $response['chengyu']="欢迎参赛";
                 $controller_connection->send(json_encode($response));
                 return;
-            }elseif ($cache1[$data['group']]['skip']==1&&$data['act']=="skip"){          //跳过,但已经超过次数
+            }elseif ($cache[$data['group']]['skip']==1&&$data['act']=="skip"){          //跳过,但已经超过次数
                 $response['alrt']="{$data['group']} 已经跳过一次,不能再次跳过";
                 $response['msg'].="{$data['group']}: cannot skip<br>";
                 echo "{$data['group']}: cannot skip\n";
@@ -954,7 +1013,7 @@ $client_worker->onWorkerStart=function ($client_worker) use ($chengyu1,$chengyu2
                 return;
             }else {                                                                     //跳过,或错误,且没超过次数
                 $chengyu=$chengyu1[++$i1];
-                $cache1[$data['group']][$data['act']]=1;
+                $cache[$data['group']][$data['act']]=1;
                 $response['chengyu']=$chengyu;
                 $clientView['chengyu']=$chengyu;
                 foreach ($client_worker->connections as $connection) {
@@ -963,7 +1022,7 @@ $client_worker->onWorkerStart=function ($client_worker) use ($chengyu1,$chengyu2
                 $controller_connection->send(json_encode($response));
                 return;
             }
-        }
+        }/*
         elseif ($data['part']=="part2"){               //第二关
             $response['part']=$data['part'];
             echo $data['part']."\n";
@@ -979,7 +1038,7 @@ $client_worker->onWorkerStart=function ($client_worker) use ($chengyu1,$chengyu2
                 $controller_connection->send(json_encode($response));
                 return;
             }
-        }
+        }*/
         elseif ($data['part']=="part3"){            //第三关
             $response['part']="part3";
             echo "part3\n";

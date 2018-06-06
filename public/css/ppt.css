@@ -1,12 +1,13 @@
 body{
-    background-image: url("../img/WallPicture.jpg");
-    background-repeat:no-repeat;
-    background-position: top right;
+    background: url("../img/WallPicture.jpg") no-repeat top right;
+}
+.panel {
+    display: none;
 }
 .chengyuContainer h1{
     position: absolute;
     top:236px;
-    right:296px;
+    right:400px;
     font-size:5.5em;
 }
 
@@ -14,7 +15,7 @@ body{
     position: absolute;
     top:50px;
     right:200px;
-    font-size:4em;
+    font-size:8em;
 }
 .nav{
     position: absolute;
@@ -57,7 +58,6 @@ tbody img{
 .countdown{
     text-align: center;
     margin-top:35px;
-
 }
 .countDown{
     margin:auto;
@@ -65,6 +65,7 @@ tbody img{
     font-size:350px;
     text-align: center;
     height:532px;
+    padding-top: 150px;
 }
 .countDownFinish{
     margin: auto;
@@ -94,6 +95,18 @@ tbody img{
     box-shadow:  1px 1px 16px grey;
     cursor: pointer;
 }
+
+.questionEntryDisable{
+    background-color: grey;
+    padding:20px 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow:  1px 1px 16px grey;
+    -moz-box-shadow:  1px 1px 16px grey;
+    box-shadow:  1px 1px 16px grey;
+    cursor: pointer;
+}
 .back{
     position: absolute;
     bottom: 163px;
@@ -106,6 +119,7 @@ tbody img{
     padding-right: 300px;
     font-size: 30px;
     color: red;
+    display: none;
 }
 .questionBody{
     text-align: center;
