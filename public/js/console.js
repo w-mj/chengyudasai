@@ -100,6 +100,7 @@ function part1() {
 function part2() {
     part = 'part2';
     showPage('timer');
+    resetTimer(100);
 
     $("ul li").removeClass("active");
     $("#nav-part2").addClass("active");
@@ -113,7 +114,6 @@ function part2() {
     $("#part1-start").hide();
     $("#part2-start").show();
 }
-
 /**
  * 切换至亲友助阵
  */
@@ -130,7 +130,6 @@ function extraPart() {
     $("#part3").css("display","none");
     $("#part4").css("display","none");
 }
-
 /**
  * 切换至第三关
  */
@@ -190,8 +189,19 @@ function part1Next() {
     ws.send(JSON.stringify(data));
     stopTimer();
     showPage('index');
+    ws.send('{"cmd":"clear_answer"}')
 }
-
+function part1Answer() {
+    let group = $("#part1-group").val();
+    let game = $("#part1-game").val();
+    let data = {
+        part: 'part1',
+        act: 'set_answer',
+        game: game,
+        group: group
+    };
+    ws.send(JSON.stringify(data));
+}
 function part1Wrong() {
     let group = $("#part1-group").val();
     group = parseInt(group);
@@ -266,62 +276,15 @@ function part3Question() {
         act: 'question'
     };
     ws.send(JSON.stringify(data));
+    resetTimer(35);
     showPage('timer');
+}
+
+function part3Time() {
     resetTimer(35);
     startTimer();
 }
 
-/**
- * 第三关——操作
- */
-function Part3Action(action){
-    var group=$("#part3-group").val();
-    var data={
-        part:"part3",
-        group:group,
-        act:action
-    };
-    ws.send(JSON.stringify(data));
-}
-
-/**
- * 第三关，开始
- */
-function Part3Start(){
-    var select=$("#part3-group");
-    var group=select.val();
-    var data={
-        part:"part3",
-        group:group,
-        act:"start"
-    };
-    ws.send(JSON.stringify(data));
-
-    select.attr("disabled",true);
-    $("#part3-btn").children("button").attr("disabled",false);
-    $("#part3-end").attr("disabled",false);
-    $("#part3-start").attr("disabled",true);
-}
-
-/**
- * 第三关，时间到
- */
-function Part3End() {
-    var select=$("#part3-group");
-    var group=select.val();
-    var data={
-        part:"part3",
-        group:group,
-        act:"end",
-        time:"60"
-    };
-    ws.send(JSON.stringify(data));
-
-    select.attr("disabled",false);
-    $("#part3-btn").children("button").attr("disabled",true);
-    $("#part3-end").attr("disabled",true);
-    $("#part3-start").attr("disabled",false);
-}
 
 /**
  * 第四关，提交成绩
@@ -442,7 +405,7 @@ function showResponder(){
  */
 function showChengyu() {
     data={
-        part:"part1",
+        part:"part1",   // TODO:
         act:"showChengyu"
     };
     ws.send(JSON.stringify(data));

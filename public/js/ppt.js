@@ -15,10 +15,15 @@ ws.onmessage = function (e) {
     {
         $("#chengyu").html(data.chengyu);
         $("#question").html("");
+        $("#answer").html("");
     }
     if (data.cmd === 'set_question') {
         $('#chengyu').html('');
         $("#question").html('' + data.question);
+    } else if (data.cmd === 'set_answer') {
+        $("#answer").html(data.answer);
+    } else if (data.cmd === 'clear_answer') {
+        $("#answer").html("");
     }
     if (data.cmd === 'show_page') {
         if (data.page === 'index') index();
