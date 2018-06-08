@@ -1,4 +1,5 @@
 let timer_cy = true;
+
 // 服务端ip为127.0.0.1
 ws = new WebSocket("ws://127.0.0.1:1235");
 ws.onopen = function () {
@@ -10,14 +11,13 @@ ws.onmessage = function (e) {
         document.getElementById("getResponder").play();
     }
     console.log(data);
-    if (data.chengyu !== "")              //成语由workerman提供
+    if (data.chengyu !== undefined)              //成语由workerman提供
     {
         $("#chengyu").html(data.chengyu);
-        $("#qu").html("");
+        $("#question").html("");
     }
     if (data.cmd === 'set_question') {
         $('#chengyu').html('');
-        console.log('111' + data.question);
         $("#question").html('' + data.question);
     }
     if (data.cmd === 'show_page') {
@@ -73,7 +73,6 @@ function index() {
 
     $('#chengyubox').css('display', 'block');
     $('#chengyubox').addClass('chengyuContainer');
-    $('#chengyubox').removeClass('chengyuContainer_in_clock');
 }
 
 function Clock() {
@@ -86,8 +85,6 @@ function Clock() {
         $('#chengyubox').css('display', 'block');
     else
         $('#chengyubox').css('display', 'none');
-    $('#chengyubox').removeClass('chengyuContainer');
-    $('#chengyubox').addClass('chengyuContainer_in_clock');
 
     $("#nav-clock").addClass("chosen");
     $("#nav-friendsHelp").removeClass("chosen");

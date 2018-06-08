@@ -6,27 +6,23 @@ body{
 }
 .chengyuContainer h1{
     position: absolute;
-    top:236px;
-    right:400px;
-    font-size:5.5em;
+    top:200px;
+    right:500px;
+    font-size:6em;
 }
 
 .questionContainer span {
     position: absolute;
     top: 100px;
     left: 400px;
-    width: 800px;
+    width: 900px;
     font-size: 50px;
 }
 
-
-
-.chengyuContainer_in_clock h1{
-    position: absolute;
-    top:50px;
-    right:200px;
-    font-size:8em;
+red {
+    color: red;
 }
+
 .nav{
     position: absolute;
     left:-40px;
@@ -66,24 +62,26 @@ tbody img{
     float: right;
 }
 .countdown{
-    text-align: center;
+    /*text-align: center;*/
     margin-top:35px;
 }
 .countDown{
     margin:auto;
     font-weight:bold;
-    font-size:350px;
-    text-align: center;
+    font-size:100px;
+    /*text-align: center;*/
     height:532px;
     padding-top: 150px;
+    left: 10px;
 }
 .countDownFinish{
     margin: auto;
     font-weight: bold;
-    text-align: center;
-    font-size: 201px;
+    /*text-align: center;*/
+    font-size: 100px;
     height: 532px;
-    padding-top: 120px;
+    padding-top: 150px;
+    left: 10px;
 }
 .entrance{
     padding:130px 67px;

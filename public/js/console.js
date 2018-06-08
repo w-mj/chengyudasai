@@ -9,7 +9,7 @@ ws.onmessage=function (e) {
         $(".thumbnail").children("p").html(data.chengyu);
     }
     if (data.msg!==undefined){
-        $("#msg").append(data.msg + '<br/>');
+        $("#msg").prepend(data.msg + '<br/>');
     }
     if (data.alrt!==undefined){
         $("#alrt").html(data.alrt);
@@ -165,26 +165,27 @@ function part4() {
 }
 
 // 第一关下一题
-let out_group = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+let out_group = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 let first = 0;
 function part1Next() {
     let group = $("#part1-group").val();
     let game = $("#part1-game").val();
-    $("#part1-game").val(game);
-    group = parseInt(group) - 1;
+    group = parseInt(group);
     if (first) {
         do {
             group = group + 1;
-            if (group == 12) {
-                group = 0;
-                $("#part1-game").val(parseInt(game) + 1);
+            if (group === 13) {
+                group = 1;
+                game = parseInt(game) + 1;
+                $("#part1-game").val(game);
             }
         } while (out_group[group] === 1);
     } else first = 1;
-    $("#part1-group").val(group + 1);
-    data = {
-        part:'part1',
-        game: game
+    $("#part1-group").val(group);
+    let data = {
+        part: 'part1',
+        game: game,
+        group: group
     };
     ws.send(JSON.stringify(data));
     stopTimer();
@@ -395,7 +396,7 @@ function extraPartSubmit(){
 /**
  * 淘汰组
  */
-function eliminageGroup() {
+function eliminateGroup() {
     var select=$("select[name=eliminate-group]");
     eliminateGroupS(select.val());
 }
