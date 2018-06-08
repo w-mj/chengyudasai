@@ -17,12 +17,14 @@ if (isset($_POST['part'])&&isset($_POST['group'])&&isset($_POST['score'])){
         echo json_encode(array('error'=>"database: connection failure<br>"));
         exit(1);
     }
-    $already_q = "SELECT `part4` from `sum` WHERE `name`=?";
-    $r = $db->prepare($already_q);
-    $already = $r->execute(array($group));
-    $already = $r->fetch(PDO::FETCH_NUM);
-    $already = $already[0];
-    $score = (int)$already + (int)$score;
+    if ($part == 'part4') {
+        $already_q = "SELECT `part4` from `sum` WHERE `name`=?";
+        $r = $db->prepare($already_q);
+        $already = $r->execute(array($group));
+        $already = $r->fetch(PDO::FETCH_NUM);
+        $already = $already[0];
+        $score = (int)$already + (int)$score;
+    }
     $q="UPDATE `sum` SET `$part`=? WHERE `name`=?";
     $stmt=$db->prepare($q);
     $r=$stmt->execute(array($score,$group));

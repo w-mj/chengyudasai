@@ -12,7 +12,13 @@ ws.onmessage = function (e) {
     console.log(data);
     if (data.chengyu !== "")              //成语由workerman提供
     {
-        $("#chengyu").text(data.chengyu);
+        $("#chengyu").html(data.chengyu);
+        $("#qu").html("");
+    }
+    if (data.cmd === 'set_question') {
+        $('#chengyu').html('');
+        console.log('111' + data.question);
+        $("#question").html('' + data.question);
     }
     if (data.cmd === 'show_page') {
         if (data.page === 'index') index();
@@ -26,25 +32,34 @@ ws.onmessage = function (e) {
     } else if (data.cmd === 'start_timer') startCountDown();
     else if (data.cmd === 'stop_timer') stopCountDown();
     else if (data.cmd === 'reset_timer') {
-        clockMode = data.time;
+        clockMode = parseInt(data.time);
         resetCountDown();
     } else if (data.cmd === 'show_timercy') {
         timer_cy = !timer_cy;
         if ($("#clock").css('display') === 'block')
             Clock();
-    } else if (data.cmd === 'set_extra_questions') {
-        $("#questions").html('');
+    } else if (data.cmd === 'set_extra_questions' || data.cmd === 'set_part4_questions') {
+        let node = null;
+        if (data.cmd === 'set_extra_questions')
+            node = $("#questions");
+        else
+            node = $("#questions4");
+        node.html('');
         for (q in data.data) {
             i = parseInt(q) + 1;
-            $("#questions").append(
+            node.append(
                 '<div class="question" id="q' + i + '" style="display: none;">\n' +
                 '<div class="questionBody">' + data.data[i-1][0] + '</div>\n' +
-                '<button class="btn btn-primary showAnswerBtn" onclick="showAnswer(' + i + ')">显示答案</button>\n' +
+                '<button class="btn btn-primary showAnswerBtn"">显示答案</button>\n' +
                 '<div class="answer answer'+i+'">' + data.data[i-1][1] + '</div>\n' +
                 '<button class="btn btn-primary back" onclick="back();" >' +
                 '<span class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回</button>\n' +
                 '</div>');
         }
+        $(".showAnswerBtn").click(function () {
+            $(this).css("display","none");
+            $(this).next(".answer").css("display","block");
+        });
     }
 };
 
@@ -54,6 +69,8 @@ function index() {
     $("#clock").css("display", "none");
     $("#friendsHelp").css("display", "none");
     $("#rank").css("display", "none");
+    $('#part4').hide();
+
     $('#chengyubox').css('display', 'block');
     $('#chengyubox').addClass('chengyuContainer');
     $('#chengyubox').removeClass('chengyuContainer_in_clock');
@@ -63,6 +80,8 @@ function Clock() {
     $("#clock").css("display", "block");
     $("#friendsHelp").css("display", "none");
     $("#rank").css("display", "none");
+    $('#part4').hide();
+
     if (timer_cy)
         $('#chengyubox').css('display', 'block');
     else
@@ -80,6 +99,7 @@ function FriendsHelp() {
     $("#friendsHelp").css("display", "block");
     $("#rank").css("display", "none");
     $('#chengyubox').css('display', 'none');
+    $('#part4').hide();
 
     $("#nav-clock").removeClass("chosen").addClass("notChosen");
     $("#nav-friendsHelp").addClass("chosen");
@@ -87,10 +107,15 @@ function FriendsHelp() {
 }
 
 function showPart4() {
-    FriendsHelp();
-    $('.questionEntry').css('background-color', '').css("box-shadow", "");
-    $('.mark-middle').css('background-color', '#FFA500');
-    $('.mark-high').css('background-color', '#FF4500');
+    $("#clock").css("display", "none");
+    $("#friendsHelp").css("display", "none");
+    $("#rank").css("display", "none");
+    $('#chengyubox').css('display', 'none');
+    $('#part4').show();
+
+    $("#nav-clock").removeClass("chosen").addClass("notChosen");
+    $("#nav-friendsHelp").addClass("chosen");
+    $("#nav-rank").removeClass("chosen");
 }
 
 function Rank() {
@@ -152,14 +177,16 @@ function stopCountDown() {
 
 function resetCountDown() {
     stopCountDown();
-    if (clockMode == 60) {
+    if (clockMode === 60) {
         $("#countDown").html("01:00").removeClass("countDownFinish").addClass("countDown");
-    } else if (clockMode == 10) {
+    } else if (clockMode === 10) {
         $("#countDown").html("00:10").removeClass("countDownFinish").addClass("countDown");
-    } else if (clockMode == 20) {
+    } else if (clockMode === 20) {
         $("#countDown").html("00:20").removeClass("countDownFinish").addClass("countDown");
-    } else if (clockMode == 100) {
+    } else if (clockMode === 100) {
         $("#countDown").html("01:40").removeClass("countDownFinish").addClass("countDown");
+    } else if (clockMode === 35) {
+        $("#countDown").html("00:35").removeClass("countDownFinish").addClass("countDown");
     }
     $("#reset").prop("disabled", true);
 }
@@ -192,8 +219,4 @@ function clock20sec() {
 function clock1min40sec() {
     clockMode = 100;
     $("#countDown").html("01:40").removeClass("countDownFinish").addClass("countDown");
-}
-
-function showAnswer(i) {
-    $(".answer"+i).show();
 }

@@ -11,6 +11,16 @@ body{
     font-size:5.5em;
 }
 
+.questionContainer span {
+    position: absolute;
+    top: 100px;
+    left: 400px;
+    width: 800px;
+    font-size: 50px;
+}
+
+
+
 .chengyuContainer_in_clock h1{
     position: absolute;
     top:50px;
@@ -85,7 +95,6 @@ tbody img{
     padding:40px 40px;
 }
 .questionEntry{
-    background-color: #64df10;
     padding:20px 10px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
@@ -94,6 +103,17 @@ tbody img{
     -moz-box-shadow:  1px 1px 16px grey;
     box-shadow:  1px 1px 16px grey;
     cursor: pointer;
+}
+
+.mark-low {
+    background-color: #64df10;
+}
+.mark-middle {
+    background-color: #ff752a
+}
+
+.mark-high {
+    background-color: orangered;
 }
 
 .questionEntryDisable{

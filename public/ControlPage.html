@@ -67,30 +67,65 @@
 
         </div>
     </div>
-    <br>
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">
                 控制台
             </h3>
         </div>
-        <div class="panel-body" id="main">
+        <div class="panel-body col-sm-8" id="main">
             <!--home页面内容-->
             <div id="home" style="display: block;">
                 <h1 style="font-size: 4em; text-align: center;">欢迎使用成语大赛控制台</h1>
             </div>
-
-            <!--第一轮控制页面内容-->
+            <!-- 第一关 -->
             <div id="part1" style="display: none;">
+                <div class="col-md-3">
+                <label for="part1-group">当前组：</label>
+                <select class="form-control" name="part1-group" id="part1-group">
+                    <option value="1">第一组</option>
+                    <option value="2">第二组</option>
+                    <option value="3">第三组</option>
+                    <option value="4">第四组</option>
+                    <option value="5">第五组</option>
+                    <option value="6">第六组</option>
+                    <option value="7">第七组</option>
+                    <option value="8">第八组</option>
+                    <option value="9">第九组</option>
+                    <option value="10">第十组</option>
+                    <option value="11">第十一组</option>
+                    <option value="12">第十二组</option>
+                </select>
+                </div>
+                <div class="col-md-3">
+                <label for="part1-game">当前轮：</label>
+                <select class="form-control" name="part1-game" id="part1-game">
+                    <option value="1">第一轮</option>
+                    <option value="2">第二轮</option>
+                    <option value="3">第三轮</option>
+                    <option value="4">第四轮</option>
+                    <option value="5">第五轮</option>
+                    <option value="6">第六轮</option>
+                    <option value="7">第七轮</option>
+                    <option value="8">第八轮</option>
+                </select>
+                </div>
+                <div class="col-md-6 btn-group">
+                    <div class="btn btn-default" onclick="part1Next();"> 下一题 </div>
+                    <div class="btn btn-info" onclick="part1Next();"> 答对 </div>
+                    <div class="btn btn-danger" onclick="part1Wrong();"> 答错 </div>
+                    <div class="btn btn-default" onclick="part1Start();"> 显示计时器并开始20s计时 </div>
+
+                </div>
+            </div>
+
+            <!--第二轮控制页面内容-->
+            <div id="part2" style="display: none;">
                 <div class="row">
                     <div class="col-sm-8 containBox">
-                        <div class="thumbnail">
-                            <img class="img-rounded img-responsive" src="img/WallPicture.jpg">
-                            <p>欢迎参赛</p>
-                        </div>
                         <div class="form-group pull-left">
-                            <label for="part1-group">当前组：</label>
-                            <select class="form-control" name="part1-group" id="part1-group">
+                            <label for="part2-group">当前组：</label>
+                            <select class="form-control" name="part2-group" id="part2-group">
                                 <option value="group1">第一组</option>
                                 <option value="group2">第二组</option>
                                 <option value="group3">第三组</option>
@@ -105,55 +140,51 @@
                                 <option value="group12">第十二组</option>
                                 <option value="extraGroup">加赛</option>
                             </select>
-                            <button class="btn" onclick="Part1Start();" id="part1-start"><span
-                                    class="glyphicon glyphicon-play"></span>&nbsp;回合开始
+
+                            <button class="btn" onclick="Part2Question();" id="part2-show-question"><span
+                                    class="glyphicon glyphicon-play"></span>&nbsp;显示题目
                             </button>
                             <button class="btn" onclick="Part2Start();" id="part2-start"><span
-                                    class="glyphicon glyphicon-play"></span>&nbsp;开始并计时
+                                    class="glyphicon glyphicon-play"></span>&nbsp;开始计时
                             </button>
-                            <button class="btn btn-primary" onclick="Part1End();" id="part1-end" disabled="disabled">
-                                <span class="glyphicon glyphicon-minus-sign">&nbsp;时间到</span></button>
+                            <button class="btn btn-primary" onclick="Part2End();" id="part2-end" disabled="disabled">
+                                <span class="glyphicon glyphicon-minus-sign">&nbsp;结束</span></button>
                         </div>
-                        <div class="pull-right" id="part1-btn">
+                        <div class="pull-right" id="part2-btn">
                             <button class="btn btn-danger" style="margin:10px 40px;"
-                                    onclick="Part1Action('breakLaw');document.getElementById('error').play();"
+                                    onclick="Part2Action('breakLaw');document.getElementById('error').play();"
                                     disabled="disabled"><span class="glyphicon glyphicon-remove"></span>&nbsp;犯规
                             </button>
-                            <button class="btn btn-warning" style="margin:10px 40px;" onclick="Part1Action('skip');"
+                            <button class="btn btn-warning" style="margin:10px 40px;" onclick="Part2Action('skip');"
                                     disabled="disabled"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;跳过
                             </button>
                             <button class="btn btn-success" style="margin:10px 40px;"
-                                    onclick="Part1Action('correct');document.getElementById('right').play();"
+                                    onclick="Part2Action('correct');document.getElementById('right').play();"
                                     disabled="disabled"><span class="glyphicon glyphicon-ok"></span>&nbsp;正确
                             </button>
                         </div>
 
                     </div>
-                    <div class="col-sm-4 containBox">
-                        <div class="panel-group" id="part1-accordion">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#part1-accordion"
-                                           href="#part1-collapseOne">
-                                            查看服务器返回信息
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="part1-collapseOne" class="panel-collapse collapse in">
-                                    <div class="panel-body" id="part1-msg">
+                    <!--<div class="col-sm-4 containBox">-->
+                        <!--<div class="panel-group" id="part2-accordion">-->
+                            <!--<div class="panel panel-default">-->
+                                <!--<div class="panel-heading">-->
+                                    <!--<h4 class="panel-title">-->
+                                        <!--<a data-toggle="collapse" data-parent="#part2-accordion"-->
+                                           <!--href="#part2-collapseOne">-->
+                                            <!--查看服务器返回信息-->
+                                        <!--</a>-->
+                                    <!--</h4>-->
+                                <!--</div>-->
+                                <!--<div id="part2-collapseOne" class="panel-collapse collapse in">-->
+                                    <!--<div class="panel-body" id="part2-msg">-->
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
                 </div>
-            </div>
-
-            <!-- 第二轮控制页面内容 与第一轮一样 -->
-            <div id="part2" style="display: none;">
-
             </div>
 
             <!-- 亲友助阵控制页面内容 -->
@@ -210,94 +241,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-4 containBox">
-                        <div class="panel-group" id="extraPart-accordion">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#extraPart-accordion"
-                                           href="#extraPart-collapseOne">
-                                            查看服务器返回信息
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="extraPart-collapseOne" class="panel-collapse collapse in">
-                                    <div class="panel-body" id="extraPart-msg">
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
 
             <!-- 第三轮控制页面内容 -->
             <div id="part3" style="display: none;">
-                <div class="row">
-                    <div class="col-sm-8 containBox">
-                        <div class="thumbnail">
-                            <img class="img-rounded img-responsive" src="img/WallPicture.jpg">
-                            <p>欢迎参赛</p>
-                        </div>
-                        <div class="form-group pull-left">
-                            <label for="part3-group">当前组：</label>
-                            <select class="form-control" name="part3-group" id="part3-group">
-                                <option value="group1">第一组</option>
-                                <option value="group2">第二组</option>
-                                <option value="group3">第三组</option>
-                                <option value="group4">第四组</option>
-                                <option value="group5">第五组</option>
-                                <option value="group6">第六组</option>
-                                <option value="group7">第七组</option>
-                                <option value="group8">第八组</option>
-                                <option value="group9">第九组</option>
-                                <option value="group10">第十组</option>
-                                <option value="group11">第十一组</option>
-                                <option value="group12">第十二组</option>
-                                <option value="extraGroup">加赛</option>
-                            </select>
-                            <button class="btn" onclick="Part3Start();" id="part3-start"><span
-                                    class="glyphicon glyphicon-play"></span>&nbsp;回合开始
-                            </button>
-                            <button class="btn btn-primary" onclick="Part3End();" id="part3-end" disabled="disabled">
-                                <span class="glyphicon glyphicon-minus-sign">&nbsp;时间到</span></button>
-                        </div>
-                        <div class="pull-right" id="part3-btn">
-                            <button class="btn btn-danger" style="margin:10px 40px;"
-                                    onclick="Part3Action('breakLaw');document.getElementById('error').play();"
-                                    disabled="disabled"><span class="glyphicon glyphicon-remove"></span>&nbsp;犯规
-                            </button>
-                            <button class="btn btn-warning" style="margin:10px 40px;" onclick="Part3Action('skip');"
-                                    disabled="disabled"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;跳过
-                            </button>
-                            <button class="btn btn-success" style="margin:10px 40px;"
-                                    onclick="Part3Action('correct');document.getElementById('right').play();"
-                                    disabled="disabled"><span class="glyphicon glyphicon-ok"></span>&nbsp;正确
-                            </button>
-                        </div>
-
-                    </div>
-                    <div class="col-sm-4 containBox">
-                        <div class="panel-group" id="part3-accordion">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#part3-accordion"
-                                           href="#part3-collapseOne">
-                                            查看服务器返回信息
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="part3-collapseOne" class="panel-collapse collapse in">
-                                    <div class="panel-body" id="part3-msg">
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="btn btn-default" onclick="part3Question();">出题并计时</div>
+                <div class="btn btn-default" onclick="part3Delay();">延时</div>
             </div>
 
             <!-- 第四轮控制页面内容 -->
@@ -344,39 +294,16 @@
                         </div>
 
                         <div class="row" style="text-align: center;">
-                            <div class="col-sm-offset-4 col-sm-3" style="margin-top: 10px;">
+                            <div class="btn-group" style="margin-top: 10px;">
                                 <button class="btn btn-primary" onclick="Part4Submit(3);" class="part4-submit"><span
                                         class="glyphicon glyphicon-hdd"></span>&nbsp;加三分
                                 </button>
-                            </div>
-                            <div class="col-sm-offset-4 col-sm-3" style="margin-top: 10px;">
                                 <button class="btn btn-primary" onclick="Part4Submit(5);" class="part4-submit"><span
                                         class="glyphicon glyphicon-hdd"></span>&nbsp;加五分
                                 </button>
-                            </div>
-                            <div class="col-sm-offset-4 col-sm-3" style="margin-top: 10px;">
                                 <button class="btn btn-primary" onclick="Part4Submit(7);" class="part4-submit"><span
                                         class="glyphicon glyphicon-hdd"></span>&nbsp;加七分
                                 </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 containBox">
-                        <div class="panel-group" id="part4-accordion">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#part4-accordion"
-                                           href="#part4-collapseOne">
-                                            查看服务器返回信息
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="part4-collapseOne" class="panel-collapse collapse in">
-                                    <div class="panel-body" id="part4-msg">
-
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -384,7 +311,25 @@
             </div>
 
         </div>
-        <div class="panel-footer text-center">计算机学院 --- 徐耀文，张无奇</div>
+        <div class="col-sm-4 containBox">
+            <div class="panel-group" id="part3-accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#part3-accordion"
+                               href="#part3-collapseOne">
+                                查看服务器返回信息
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="part3-collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body" id="msg">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <audio src="audio/error.wav" controls="controls" id="error" style="visibility: hidden; display: none;">
     </audio>

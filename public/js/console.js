@@ -8,32 +8,12 @@ ws.onmessage=function (e) {
     {
         $(".thumbnail").children("p").html(data.chengyu);
     }
-    if (data.part==="part1" || data.part==="part2"){
-        if (data.msg!==undefined){
-            $("#part1-msg").append(data.msg);
-        }
-        if (data.alrt!==undefined){
-            $("#alrt").html(data.alrt);
-            $("#alertModal").modal("show");
-        }
+    if (data.msg!==undefined){
+        $("#msg").append(data.msg + '<br/>');
     }
-    if (data.part==="part3"){
-        if (data.msg!==undefined){
-            $("#part3-msg").append(data.msg);
-        }
-        if (data.alrt!==undefined){
-            $("#alrt").html(data.alrt);
-            $("#alertModal").modal("show");
-        }
-    }
-    if (data.part==="part4"){
-        if (data.msg!==undefined){
-            $("#part4-msg").append(data.msg);
-        }
-        if (data.alrt!==undefined){
-            $("#alrt").html(data.alrt);
-            $("#alertModal").modal("show");
-        }
+    if (data.alrt!==undefined){
+        $("#alrt").html(data.alrt);
+        $("#alertModal").modal("show");
     }
 
 };
@@ -125,8 +105,8 @@ function part2() {
     $("#nav-part2").addClass("active");
 
     $("#home").css("display","none");
-    $("#part1").css("display","block");
-    $("#part2").css("display","none");
+    $("#part1").css("display","none");
+    $("#part2").css("display","block");
     $("#extraPart").css("display","none");
     $("#part3").css("display","none");
     $("#part4").css("display","none");
@@ -184,11 +164,52 @@ function part4() {
     $("#part4").css("display","block");
 }
 
+// 第一关下一题
+let out_group = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+let first = 0;
+function part1Next() {
+    let group = $("#part1-group").val();
+    let game = $("#part1-game").val();
+    $("#part1-game").val(game);
+    group = parseInt(group) - 1;
+    if (first) {
+        do {
+            group = group + 1;
+            if (group == 12) {
+                group = 0;
+                $("#part1-game").val(parseInt(game) + 1);
+            }
+        } while (out_group[group] === 1);
+    } else first = 1;
+    $("#part1-group").val(group + 1);
+    data = {
+        part:'part1',
+        game: game
+    };
+    ws.send(JSON.stringify(data));
+    stopTimer();
+    showPage('index');
+}
+
+function part1Wrong() {
+    let group = $("#part1-group").val();
+    group = parseInt(group);
+    out_group[group - 1] = 1;
+    part1Next();
+    eliminateGroupS('group' + group);
+}
+
+function part1Start() {
+    showPage('timer');
+    resetTimer(20);
+    startTimer();
+}
+
 /**
- * 第一关——操作
+ * 第二关——操作
  */
-function Part1Action(action){
-    var group=$("#part1-group").val();
+function Part2Action(action){
+    var group=$("#part2-group").val();
     var data={
         part: part,
         group:group,
@@ -197,29 +218,12 @@ function Part1Action(action){
     ws.send(JSON.stringify(data));
 }
 
-/**
- * 第一关，开始
- */
-function Part1Start(){
-    var select=$("#part1-group");
-    var group=select.val();
-    var data={
-        part:part,
-        group:group,
-        act:"start"
-    };
-    ws.send(JSON.stringify(data));
-    select.attr("disabled",true);
-    $("#part1-btn").children("button").attr("disabled",false);
-    $("#part1-end").attr("disabled",false);
-    $("#part1-start").attr("disabled",true);
-}
 
 /**
- * 第一关，时间到
+ * 第二关，时间到
  */
-function Part1End() {
-    var select=$("#part1-group");
+function Part2End() {
+    var select=$("#part2-group");
     var group=select.val();
     var data={
         part:part,
@@ -234,122 +238,36 @@ function Part1End() {
     $("#part1-start").attr("disabled",false);
 }
 
+/** 第二关 开始计时*/
 function Part2Start() {
-    showPage('timer');
-    resetTimer(40);
+    resetTimer(100);
     startTimer();
-    Part1Start();
-}
-
-/**
- * 第二关，提交成绩
-
-function Part2Submit() {
-    var groupOneSelect=$("select[name=part2-groupOne]");
-    var groupTwoSelect=$("select[name=part2-groupTwo]");
-
-    var groupOne=groupOneSelect.val();
-    var groupTwo=groupTwoSelect.val();
-
-    if (groupOne==""||groupTwo==""){
-        $("#alrt").html("请选择两个组后，再提交");
-        $("#alertModal").modal('show');
-        return;
-    }
-    if (groupOne==groupTwo){
-        $("#alrt").html("两个组不能选成一样的");
-        $("#alertModal").modal('show');
-        return;
-    }
-
-    var groupOneCount=0;
-    var groupTwoCount=0;
-
-    if ($("input[name=part2-q1-groupOne-win]").is(":checked")){
-        groupOneCount++;
-    }
-    if ($("input[name=part2-q1-groupTwo-win]").is(":checked")){
-        groupTwoCount++;
-    }
-
-    if ($("input[name=part2-q2-groupOne-win]").is(":checked")){
-        groupOneCount++;
-    }
-    if ($("input[name=part2-q2-groupTwo-win]").is(":checked")){
-        groupTwoCount++;
-    }
-
-    if ($("input[name=part2-q3-groupOne-win]").is(":checked")){
-        groupOneCount++;
-    }
-    if ($("input[name=part2-q3-groupTwo-win]").is(":checked")){
-        groupTwoCount++;
-    }
-
-    if ($("input[name=part2-q4-groupOne-win]").is(":checked")){
-        groupOneCount++;
-    }
-    if ($("input[name=part2-q4-groupTwo-win]").is(":checked")){
-        groupTwoCount++;
-    }
-
-    if ($("input[name=part2-q5-groupOne-win]").is(":checked")){
-        groupOneCount++;
-    }
-    if ($("input[name=part2-q5-groupTwo-win]").is(":checked")){
-        groupTwoCount++;
-    }
-
-
-
-    var success=1;
-    $.post("save.php",{
-        part:"part2",
-        group:groupOne,
-        score:groupOneCount
-    },function (data) {
-        data=eval("("+data+")");
-        if (data.msg!==undefined){
-            $("#part2-msg").append(data.msg);
-        }
-        if (data.error!==undefined){
-            $("#part2-msg").append(data.error);
-            success=0;
-        }
-    });
-    $.post("save.php",{
-        part:"part2",
-        group:groupTwo,
-        score:groupTwoCount
-    },function (data) {
-        data=eval("("+data+")");
-        if (data.msg!==undefined){
-            $("#part2-msg").append(data.msg);
-        }
-        if (data.error!==undefined){
-            $("#part2-msg").append(data.error);
-            success=0;
-        }
-    });
-
-    if (success){
-        groupOneSelect.children("option").prop("selected",false);
-        groupTwoSelect.children("option").prop("selected",false);
-        groupOneSelect.children(".part2-select-default").prop("selected",true);
-        groupTwoSelect.children(".part2-select-default").prop("selected",true);
-        $("input[type=checkbox]").prop("checked",false);
-    }
 }
 
 /**
  * 第二关，切换成语
  */
-function Part2Next(){
+function Part2Question(){
+    var group=$("#part2-group").val();
     var data={
         part:"part2",
-        act:"next"
+        act:"start",
+        group: group
     };
     ws.send(JSON.stringify(data));
+    $("#part2-btn").children("button").attr("disabled",false);
+    $("#part2-end").attr("disabled",false);
+}
+
+function part3Question() {
+    let data = {
+        part: 'part3',
+        act: 'question'
+    };
+    ws.send(JSON.stringify(data));
+    showPage('timer');
+    resetTimer(35);
+    startTimer();
 }
 
 /**
@@ -477,9 +395,12 @@ function extraPartSubmit(){
 /**
  * 淘汰组
  */
-function eliminateGroup(){
+function eliminageGroup() {
     var select=$("select[name=eliminate-group]");
-    var group=select.val();
+    eliminateGroupS(select.val());
+}
+function eliminateGroupS(select){
+    var group=select;
     if (group!==""){
         $.post("save.php",{
             part:"eliminate",

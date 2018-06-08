@@ -28,6 +28,9 @@
                     欢迎参赛
                 </h1>
             </div>
+            <div class="questionContainer">
+                <span id="question"></span>
+            </div>
             <!--计时器-->
             <div id="clock" style="display: none;">
                 <div class="countdown">
@@ -81,44 +84,44 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-3 questionEntryContainer">
-                            <div class="questionEntry mark-middle" onclick="showQuestion(5)">
+                            <div class="questionEntry mark-low" onclick="showQuestion(5)">
                                 <span>5</span>
                             </div>
                         </div>
                         <div class="col-sm-3 questionEntryContainer">
-                            <div class="questionEntry mark-middle" onclick="showQuestion(6)">
+                            <div class="questionEntry mark-low" onclick="showQuestion(6)">
                                 <span>6</span>
                             </div>
                         </div>
                         <div class="col-sm-3 questionEntryContainer">
-                            <div class="questionEntry mark-middle" onclick="showQuestion(7)">
+                            <div class="questionEntry mark-low" onclick="showQuestion(7)">
                                 <span>7</span>
                             </div>
                         </div>
                         <div class="col-sm-3 questionEntryContainer">
-                            <div class="questionEntry mark-middle" onclick="showQuestion(8)">
+                            <div class="questionEntry mark-low" onclick="showQuestion(8)">
                                 <span>8</span>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-3 questionEntryContainer">
-                            <div class="questionEntry mark-high" onclick="showQuestion(9)">
+                            <div class="questionEntry mark-low" onclick="showQuestion(9)">
                                 <span>9</span>
                             </div>
                         </div>
                         <div class="col-sm-3 questionEntryContainer">
-                            <div class="questionEntry mark-high" onclick="showQuestion(10)">
+                            <div class="questionEntry mark-low" onclick="showQuestion(10)">
                                 <span>10</span>
                             </div>
                         </div>
                         <div class="col-sm-3 questionEntryContainer">
-                            <div class="questionEntry mark-high" onclick="showQuestion(11)">
+                            <div class="questionEntry mark-low" onclick="showQuestion(11)">
                                 <span>11</span>
                             </div>
                         </div>
                         <div class="col-sm-3 questionEntryContainer">
-                            <div class="questionEntry mark-high" onclick="showQuestion(12)">
+                            <div class="questionEntry mark-low" onclick="showQuestion(12)">
                                 <span>12</span>
                             </div>
                         </div>
@@ -128,6 +131,42 @@
 
                 </div>
             </div>
+
+            <div id="part4" style="display: none;">
+                <div class="entrance">
+                    <table class="table table-responsive">
+                        <caption>选择一道题目</caption>
+                        <tbody>
+                        <tr>
+                            <th> <div class="questionEntry mark-low" onclick="showQuestion(1)"> <span>1</span> </div> </th>
+                            <th> <div class="questionEntry mark-middle" onclick="showQuestion(6)"> <span>6</span> </div> </th>
+                            <th> <div class="questionEntry mark-high" onclick="showQuestion(11)"> <span>11</span> </div> </th>
+                        </tr>
+                        <tr>
+                            <th> <div class="questionEntry mark-low" onclick="showQuestion(2)"> <span>6</span> </div> </th>
+                            <th> <div class="questionEntry mark-middle" onclick="showQuestion(7)"> <span>7</span> </div> </th>
+                            <th> <div class="questionEntry mark-high" onclick="showQuestion(12)"> <span>12</span> </div> </th>
+                        </tr>
+                        <tr>
+                            <th> <div class="questionEntry mark-low" onclick="showQuestion(3)"> <span>3</span> </div> </th>
+                            <th> <div class="questionEntry mark-middle" onclick="showQuestion(8)"> <span>8</span> </div> </th>
+                        </tr>
+                        <tr>
+                            <th> <div class="questionEntry mark-low" onclick="showQuestion(4)"> <span>4</span> </div> </th>
+                            <th> <div class="questionEntry mark-middle" onclick="showQuestion(9)"> <span>9</span> </div> </th>
+                        </tr>
+                        <tr>
+                            <th> <div class="questionEntry mark-low" onclick="showQuestion(5)"> <span>5</span> </div> </th>
+                            <th> <div class="questionEntry mark-middle" onclick="showQuestion(11)"> <span>11</span> </div> </th>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="questions" id="questions4">
+
+                </div>
+            </div>
+
 
             <!--排名-->
             <div id="rank" style="display: none; margin: auto;">
@@ -164,10 +203,7 @@
         $(".questionEntry").click(function () {
             $(this).css("background-color","grey").css("box-shadow","inset 0px 0px 9px black");
         });
-        $(".showAnswerBtn").click(function () {
-            $(this).css("display","none");
-            $(this).next(".answer").css("display","block");
-        });
+
     })
 </script>
 </body>
