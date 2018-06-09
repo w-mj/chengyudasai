@@ -1,6 +1,9 @@
 body{
     background: url("../img/WallPicture.jpg") no-repeat top right;
 }
+thead tr th {
+    text-align: center;
+}
 .panel {
     display: none;
 }
@@ -152,7 +155,7 @@ tbody img{
     font-size: 40px;
     margin: auto;
     padding-top: 190px;
-    width: 1000px;
+    width: 1040px;
     padding-left: 300px;
 }
 .showAnswerBtn{

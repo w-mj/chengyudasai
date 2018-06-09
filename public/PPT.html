@@ -12,266 +12,489 @@
 
 </head>
 <body>
-    <div class="nav" style="display: none">
-        <ul type="none">
-            <li style="padding-top:36px;" onclick="Clock();" id="nav-clock" class="notChosen chosen">计时器</li>
-            <li style="padding-top:21px;" onclick="FriendsHelp();" id="nav-friendsHelp" class="notChosen">亲友助阵</li>
-            <li style="padding-top:36px;" onclick="Rank();" id="nav-rank" class="notChosen">积分榜</li>
-        </ul>
-    </div>
-    <div class="transparent">
+<div class="nav" style="display: none">
+    <ul type="none">
+        <li style="padding-top:36px;" onclick="Clock();" id="nav-clock" class="notChosen chosen">计时器</li>
+        <li style="padding-top:21px;" onclick="FriendsHelp();" id="nav-friendsHelp" class="notChosen">亲友助阵</li>
+        <li style="padding-top:36px;" onclick="Rank();" id="nav-rank" class="notChosen">积分榜</li>
+    </ul>
+</div>
+<div class="transparent">
 
-        <div class="container" style="margin: 0 50px;">
-            <!--index-->
-            <div id='chengyubox' class="chengyuContainer">
-                <h1 id="chengyu">
-                    欢迎参赛
-                </h1>
-            </div>
-            <div class="questionContainer">
-                <span id="question"></span>
-            </div>
-            <div class="answerContainer">
-                <span id="answer"></span>
-            </div>
-            <!--计时器-->
-            <div id="clock" style="display: none;">
-                <div class="countdown">
-                    <div id="mod" style="display: none">
-                        <button class="btn" onclick="clock1min40sec();">100秒</button>
-                        <button class="btn" onclick="clock1min();">60秒</button>
-                        <button class="btn" onclick="clock20sec();">20秒</button>
-                        <button class="btn" onclick="clock10sec();">10秒</button>
-                    </div>
-
-                    <div id="countDown" class="countDown">01:40</div>
-                    <div class="row panel">
-                        <div class="col-sm-4 pull-left">
-                            <button class="btn btn-warning" id="reset" onclick="resetCountDown();" disabled>&nbsp;&nbsp;&nbsp;&nbsp;复位&nbsp;&nbsp;&nbsp;&nbsp;</button>
-                        </div>
-                        <div class="col-sm-4" style="text-align: center;">
-                            <button class="btn btn-success" id="start" onclick="startCountDown();">&nbsp;&nbsp;&nbsp;&nbsp;开始 &nbsp;&nbsp;&nbsp;&nbsp;</button>
-                        </div>
-                        <div class="col-sm-4 pull-right">
-                            <button class="btn btn-danger" id="stop" onclick="stopCountDown();" disabled>&nbsp;&nbsp;&nbsp;&nbsp;停止&nbsp;&nbsp;&nbsp;&nbsp;</button>
-                        </div>
+    <div class="container" style="margin: 0 50px;">
+        <!--index-->
+        <div id='chengyubox' class="chengyuContainer">
+            <h1 id="chengyu">
+                欢迎参赛
+            </h1>
+        </div>
+        <div class="questionContainer">
+            <span id="question"></span>
+        </div>
+        <div class="answerContainer">
+            <span id="answer"></span>
+        </div>
+        <!--计时器-->
+        <div id="clock" style="display: none;">
+            <div class="countdown">
+                <div id="mod" style="display: none">
+                    <button class="btn" onclick="clock1min40sec();">100秒</button>
+                    <button class="btn" onclick="clock1min();">60秒</button>
+                    <button class="btn" onclick="clock20sec();">20秒</button>
+                    <button class="btn" onclick="clock10sec();">10秒</button>
                 </div>
-                </div>
-            </div>
 
-            <!--亲友助阵题目-->
-            <div id="friendsHelp" style="display: none;">
-                <div class="entrance">
-                    <h2>选择一道题目</h2>
-                    <div class="row">
-                        <div class="col-sm-3 questionEntryContainer">
-                            <div class="questionEntry mark-low" onclick="showQuestion(1)">
-                                <span>1</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-3 questionEntryContainer">
-                            <div class="questionEntry mark-low" onclick="showQuestion(2)">
-                                <span>2</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-3 questionEntryContainer">
-                            <div class="questionEntry mark-low" onclick="showQuestion(3)">
-                                <span>3</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-3 questionEntryContainer">
-                            <div class="questionEntry mark-low" onclick="showQuestion(4)">
-                                <span>4</span>
-                            </div>
-                        </div>
+                <div id="countDown" class="countDown">01:40</div>
+                <div class="row panel">
+                    <div class="col-sm-4 pull-left">
+                        <button class="btn btn-warning" id="reset" onclick="resetCountDown();" disabled>&nbsp;&nbsp;&nbsp;&nbsp;复位&nbsp;&nbsp;&nbsp;&nbsp;</button>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-3 questionEntryContainer">
-                            <div class="questionEntry mark-low" onclick="showQuestion(5)">
-                                <span>5</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-3 questionEntryContainer">
-                            <div class="questionEntry mark-low" onclick="showQuestion(6)">
-                                <span>6</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-3 questionEntryContainer">
-                            <div class="questionEntry mark-low" onclick="showQuestion(7)">
-                                <span>7</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-3 questionEntryContainer">
-                            <div class="questionEntry mark-low" onclick="showQuestion(8)">
-                                <span>8</span>
-                            </div>
-                        </div>
+                    <div class="col-sm-4" style="text-align: center;">
+                        <button class="btn btn-success" id="start" onclick="startCountDown();">&nbsp;&nbsp;&nbsp;&nbsp;开始
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                        </button>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-3 questionEntryContainer">
-                            <div class="questionEntry mark-low" onclick="showQuestion(9)">
-                                <span>9</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-3 questionEntryContainer">
-                            <div class="questionEntry mark-low" onclick="showQuestion(10)">
-                                <span>10</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-3 questionEntryContainer">
-                            <div class="questionEntry mark-low" onclick="showQuestion(11)">
-                                <span>11</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-3 questionEntryContainer">
-                            <div class="questionEntry mark-low" onclick="showQuestion(12)">
-                                <span>12</span>
-                            </div>
-                        </div>
+                    <div class="col-sm-4 pull-right">
+                        <button class="btn btn-danger" id="stop" onclick="stopCountDown();" disabled>&nbsp;&nbsp;&nbsp;&nbsp;停止&nbsp;&nbsp;&nbsp;&nbsp;</button>
                     </div>
                 </div>
-                    <div class="questions" id="questions"><div class="question" id="q1" style="display: none;">
-                        <div class="questionBody">填空组成词语：<br>神（）（）神<br>精（）（）精<br>痛（）（）痛</div>
-                        <button class="btn btn-primary showAnswerBtn">显示答案</button>
-                        <div class="answer answer1">乎 其 、 益 求 、 定 思</div>
-                        <button class="btn btn-primary back" onclick="back();"><span class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回</button>
-                    </div><div class="question" id="q2" style="display: none;">
-                        <div class="questionBody">最难听的歌曲：陈词滥调；<br>最绵长的口水：垂延三尺；<br>最宽阔的胸怀：（                 ）<br>最反常的天气：（                 ）</div>
-                        <button class="btn btn-primary showAnswerBtn">显示答案</button>
-                        <div class="answer answer2">虚怀若谷、六月飞雪</div>
-                        <button class="btn btn-primary back" onclick="back();"><span class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回</button>
-                    </div><div class="question" id="q3" style="display: none;">
-                        <div class="questionBody">看数字猜成语：<br>12345609 <br>1256789<br>3.5<br>9寸+1寸=1尺 </div>
-                        <button class="btn btn-primary showAnswerBtn">显示答案</button>
-                        <div class="answer answer3">七零八落、丢三落四、不三不四、得寸进尺</div>
-                        <button class="btn btn-primary back" onclick="back();"><span class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回</button>
-                    </div><div class="question" id="q4" style="display: none;">
-                        <div class="questionBody">谁是主角：成语很多来源于故事，说出下列成语故事的主角<br>三顾茅庐<br>入木三分<br>背水一战</div>
-                        <button class="btn btn-primary showAnswerBtn">显示答案</button>
-                        <div class="answer answer4">刘备、王羲之、韩信</div>
-                        <button class="btn btn-primary back" onclick="back();"><span class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回</button>
-                    </div><div class="question" id="q5" style="display: none;">
-                        <div class="questionBody">判断成语使用是否恰当：<br>这次商品博览会，聚集了全国各种各样的商品，真是<red>浩如烟海</red><br>
-                            初春，乍暖还寒。他穿着冬装，漫步在广阔的田野中，仍然觉得<red>不寒而栗</red></div>
-                        <button class="btn btn-primary showAnswerBtn">显示答案</button>
-                        <div class="answer answer5">错误</div>
-                        <button class="btn btn-primary back" onclick="back();"><span class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回</button>
-                    </div><div class="question" id="q6" style="display: none;">
-                        <div class="questionBody">1）填地名：<br>（  ）亲友如相问，一片冰心在玉壶。<br>（  ）朝雨浥轻尘，客舍青青柳色新。<br>2）填季节：<br>银烛（）光冷画屏，轻罗小扇扑流萤。</div>
-                        <button class="btn btn-primary showAnswerBtn">显示答案</button>
-                        <div class="answer answer6">洛阳  渭城  秋 </div>
-                        <button class="btn btn-primary back" onclick="back();"><span class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回</button>
-                    </div><div class="question" id="q7" style="display: none;">
-                        <div class="questionBody">说出和下列诗词有关的风景胜地：<br>1）两岸猿声啼不住，轻舟已过万重山 <br>2）会当凌绝顶，一览众山小 </div>
-                        <button class="btn btn-primary showAnswerBtn">显示答案</button>
-                        <div class="answer answer7">三峡    泰山</div>
-                        <button class="btn btn-primary back" onclick="back();"><span class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回</button>
-                    </div><div class="question" id="q8" style="display: none;">
-                        <div class="questionBody">“但使龙城飞将在，不教胡马度阴山”中的“龙城飞将”指的是（  ）<br>A、汉朝名将霍去病  B、汉朝名将李广 C、赵国名将廉颇  D、三国名将赵云</div>
-                        <button class="btn btn-primary showAnswerBtn">显示答案</button>
-                        <div class="answer answer8">B</div>
-                        <button class="btn btn-primary back" onclick="back();"><span class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回</button>
-                    </div><div class="question" id="q9" style="display: none;">
-                        <div class="questionBody">你能从中看出诗人描写的季节吗？<br>1）月落乌啼霜满天，江枫渔火对愁眠。（   ）<br>2）天阶夜色凉如水，卧看牵牛织女星。（    ）</div>
-                        <button class="btn btn-primary showAnswerBtn">显示答案</button>
-                        <div class="answer answer9">秋   夏</div>
-                        <button class="btn btn-primary back" onclick="back();"><span class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回</button>
-                    </div><div class="question" id="q10" style="display: none;">
-                        <div class="questionBody">准确读出下面词的读音：高丽  鄱阳湖 胴体</div>
-                        <button class="btn btn-primary showAnswerBtn">显示答案</button>
-                        <div class="answer answer10">（li 二声）   （po二声）   （dong四声）</div>
-                        <button class="btn btn-primary back" onclick="back();"><span class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回</button>
-                    </div><div class="question" id="q11" style="display: none;">
-                        <div class="questionBody">最土的汉字</div>
-                        <button class="btn btn-primary showAnswerBtn">显示答案</button>
-                        <div class="answer answer11">垚（读尧）</div>
-                        <button class="btn btn-primary back" onclick="back();"><span class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回</button>
-                    </div><div class="question" id="q12" style="display: none;">
-                        <div class="questionBody">汉字溯源：例：“又”最初的字形像人的右手，所以现在许多由“又”组成的字中“又”都有手的的意思。<br>以下哪个字中，“又”的取义与手无关？<br>A.友      B.取      C.受      D.劝</div>
-                        <button class="btn btn-primary showAnswerBtn">显示答案</button>
-                        <div class="answer answer12">D</div>
-                        <button class="btn btn-primary back" onclick="back();"><span class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回</button>
-                    </div></div>
             </div>
+        </div>
 
-            <div id="part4" style="display: none;">
-                <div class="entrance">
-                    <table class="table table-responsive">
-                        <caption>选择一道题目</caption>
-                        <tbody>
-                        <tr>
-                            <th> <div class="questionEntry mark-low" onclick="showQuestion(1)"> <span>1</span> </div> </th>
-                            <th> <div class="questionEntry mark-middle" onclick="showQuestion(6)"> <span>6</span> </div> </th>
-                            <th> <div class="questionEntry mark-high" onclick="showQuestion(11)"> <span>11</span> </div> </th>
-                        </tr>
-                        <tr>
-                            <th> <div class="questionEntry mark-low" onclick="showQuestion(2)"> <span>6</span> </div> </th>
-                            <th> <div class="questionEntry mark-middle" onclick="showQuestion(7)"> <span>7</span> </div> </th>
-                            <th> <div class="questionEntry mark-high" onclick="showQuestion(12)"> <span>12</span> </div> </th>
-                        </tr>
-                        <tr>
-                            <th> <div class="questionEntry mark-low" onclick="showQuestion(3)"> <span>3</span> </div> </th>
-                            <th> <div class="questionEntry mark-middle" onclick="showQuestion(8)"> <span>8</span> </div> </th>
-                        </tr>
-                        <tr>
-                            <th> <div class="questionEntry mark-low" onclick="showQuestion(4)"> <span>4</span> </div> </th>
-                            <th> <div class="questionEntry mark-middle" onclick="showQuestion(9)"> <span>9</span> </div> </th>
-                        </tr>
-                        <tr>
-                            <th> <div class="questionEntry mark-low" onclick="showQuestion(5)"> <span>5</span> </div> </th>
-                            <th> <div class="questionEntry mark-middle" onclick="showQuestion(11)"> <span>11</span> </div> </th>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="questions" id="questions4">
-
-                </div>
-            </div>
-
-
-            <!--排名-->
-            <div id="rank" style="display: none; margin: auto;">
-                <table class="table table-bordered table-hover">
-                    <caption class="table-title">积分榜</caption>
-                    <thead style="font-size: 25px;">
+        <!--亲友助阵题目-->
+        <div id="friendsHelp" style="display: none;">
+            <div class="entrance">
+                <h2>选择一道题目</h2>
+                <table class="table table-responsive">
+                    <thead>
                     <tr>
-                        <th>小组</th>
-                        <th>第一轮</th>
-                        <th>第二轮</th>
-                        <th>亲友助阵</th>
-                        <th>第三轮</th>
-                        <th>第四轮</th>
-                        <th>总积分</th>
+                        <th>诗词</th>
+                        <th>成语</th>
+                        <th>汉字</th>
                     </tr>
                     </thead>
-                    <tbody id="rank-body" style="font-size: 30px; font-weight: bold;">
+                    <tbody>
+                    <tr>
+                        <th>
+                            <div class="questionEntry mark-low" onclick="showQuestion(1)"><span>1</span></div>
+                        </th>
+                        <th>
+                            <div class="questionEntry mark-low" onclick="showQuestion(6)"><span>6</span></div>
+                        </th>
+                        <th>
+                            <div class="questionEntry mark-low" onclick="showQuestion(10)"><span>10</span>
+                            </div>
+                        </th>
 
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="questionEntry mark-low" onclick="showQuestion(2)"><span>2</span></div>
+                        </th>
+                        <th>
+                            <div class="questionEntry mark-low" onclick="showQuestion(7)"><span>7</span></div>
+                        </th>
+                        <th>
+                            <div class="questionEntry mark-low" onclick="showQuestion(11)"><span>11</span>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="questionEntry mark-low" onclick="showQuestion(3)"><span>3</span>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="questionEntry mark-low" onclick="showQuestion(8)"><span>8</span>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="questionEntry mark-low" onclick="showQuestion(12)"><span>12</span>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="questionEntry mark-low" onclick="showQuestion(4)"><span>4</span>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="questionEntry mark-low" onclick="showQuestion(9)"><span>9</span>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="questionEntry mark-low" onclick="showQuestion(5)"><span>5</span>
+                            </div>
+                        </th>
+                    </tr>
                     </tbody>
                 </table>
             </div>
+            <div class="questions" id="questions">
+                <div class="question" id="q1" style="display: none;">
+                    <div class="questionBody">填空组成词语：<br>神（）（）神<br>精（）（）精<br>痛（）（）痛</div>
+                    <button class="btn btn-primary showAnswerBtn">显示答案</button>
+                    <div class="answer answer1">乎 其 、 益 求 、 定 思</div>
+                    <button class="btn btn-primary back" onclick="back();"><span
+                            class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回
+                    </button>
+                </div>
+                <div class="question" id="q2" style="display: none;">
+                    <div class="questionBody">最难听的歌曲：陈词滥调；<br>最绵长的口水：垂延三尺；<br>最宽阔的胸怀：（ ）<br>最反常的天气：（ ）</div>
+                    <button class="btn btn-primary showAnswerBtn">显示答案</button>
+                    <div class="answer answer2">虚怀若谷、六月飞雪</div>
+                    <button class="btn btn-primary back" onclick="back();"><span
+                            class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回
+                    </button>
+                </div>
+                <div class="question" id="q3" style="display: none;">
+                    <div class="questionBody">看数字猜成语：<br>12345609 <br>1256789<br>3.5<br>9寸+1寸=1尺</div>
+                    <button class="btn btn-primary showAnswerBtn">显示答案</button>
+                    <div class="answer answer3">七零八落、丢三落四、不三不四、得寸进尺</div>
+                    <button class="btn btn-primary back" onclick="back();"><span
+                            class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回
+                    </button>
+                </div>
+                <div class="question" id="q4" style="display: none;">
+                    <div class="questionBody">谁是主角：成语很多来源于故事，说出下列成语故事的主角<br>三顾茅庐<br>入木三分<br>背水一战</div>
+                    <button class="btn btn-primary showAnswerBtn">显示答案</button>
+                    <div class="answer answer4">刘备、王羲之、韩信</div>
+                    <button class="btn btn-primary back" onclick="back();"><span
+                            class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回
+                    </button>
+                </div>
+                <div class="question" id="q5" style="display: none;">
+                    <div class="questionBody">判断成语使用是否恰当：<br>这次商品博览会，聚集了全国各种各样的商品，真是
+                        <red>浩如烟海</red>
+                        <br>
+                        初春，乍暖还寒。他穿着冬装，漫步在广阔的田野中，仍然觉得
+                        <red>不寒而栗</red>
+                    </div>
+                    <button class="btn btn-primary showAnswerBtn">显示答案</button>
+                    <div class="answer answer5">错误</div>
+                    <button class="btn btn-primary back" onclick="back();"><span
+                            class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回
+                    </button>
+                </div>
+                <div class="question" id="q6" style="display: none;">
+                    <div class="questionBody">1）填地名：<br>（ ）亲友如相问，一片冰心在玉壶。<br>（ ）朝雨浥轻尘，客舍青青柳色新。<br>2）填季节：<br>银烛（）光冷画屏，轻罗小扇扑流萤。
+                    </div>
+                    <button class="btn btn-primary showAnswerBtn">显示答案</button>
+                    <div class="answer answer6">洛阳 渭城 秋</div>
+                    <button class="btn btn-primary back" onclick="back();"><span
+                            class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回
+                    </button>
+                </div>
+                <div class="question" id="q7" style="display: none;">
+                    <div class="questionBody">说出和下列诗词有关的风景胜地：<br>1）两岸猿声啼不住，轻舟已过万重山 <br>2）会当凌绝顶，一览众山小</div>
+                    <button class="btn btn-primary showAnswerBtn">显示答案</button>
+                    <div class="answer answer7">三峡 泰山</div>
+                    <button class="btn btn-primary back" onclick="back();"><span
+                            class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回
+                    </button>
+                </div>
+                <div class="question" id="q8" style="display: none;">
+                    <div class="questionBody">“但使龙城飞将在，不教胡马度阴山”中的“龙城飞将”指的是（ ）<br>A、汉朝名将霍去病 B、汉朝名将李广 C、赵国名将廉颇 D、三国名将赵云
+                    </div>
+                    <button class="btn btn-primary showAnswerBtn">显示答案</button>
+                    <div class="answer answer8">B</div>
+                    <button class="btn btn-primary back" onclick="back();"><span
+                            class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回
+                    </button>
+                </div>
+                <div class="question" id="q9" style="display: none;">
+                    <div class="questionBody">你能从中看出诗人描写的季节吗？<br>1）月落乌啼霜满天，江枫渔火对愁眠。（ ）<br>2）天阶夜色凉如水，卧看牵牛织女星。（ ）</div>
+                    <button class="btn btn-primary showAnswerBtn">显示答案</button>
+                    <div class="answer answer9">秋 夏</div>
+                    <button class="btn btn-primary back" onclick="back();"><span
+                            class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回
+                    </button>
+                </div>
+                <div class="question" id="q10" style="display: none;">
+                    <div class="questionBody">准确读出下面词的读音：高丽 鄱阳湖 胴体</div>
+                    <button class="btn btn-primary showAnswerBtn">显示答案</button>
+                    <div class="answer answer10">（li 二声） （po二声） （dong四声）</div>
+                    <button class="btn btn-primary back" onclick="back();"><span
+                            class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回
+                    </button>
+                </div>
+                <div class="question" id="q11" style="display: none;">
+                    <div class="questionBody">最土的汉字</div>
+                    <button class="btn btn-primary showAnswerBtn">显示答案</button>
+                    <div class="answer answer11">垚（读尧）</div>
+                    <button class="btn btn-primary back" onclick="back();"><span
+                            class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回
+                    </button>
+                </div>
+                <div class="question" id="q12" style="display: none;">
+                    <div class="questionBody">汉字溯源：例：“又”最初的字形像人的右手，所以现在许多由“又”组成的字中“又”都有手的的意思。<br>以下哪个字中，“又”的取义与手无关？<br>A.友
+                        B.取 C.受 D.劝
+                    </div>
+                    <button class="btn btn-primary showAnswerBtn">显示答案</button>
+                    <div class="answer answer12">D</div>
+                    <button class="btn btn-primary back" onclick="back();"><span
+                            class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="part4" style="display: none;">
+            <div class="entrance">
+                <table class="table table-responsive">
+                    <caption>选择一道题目</caption>
+                    <thead>
+                    <tr>
+                        <th>诗词</th>
+                        <th>成语</th>
+                        <th>汉字</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th>
+                            <div class="questionEntry mark-low" onclick="showQuestion4(1)"><span>1 &nbsp; 文忠</span></div>
+                        </th>
+                        <th>
+                            <div class="questionEntry mark-low" onclick="showQuestion4(6)"><span>6 &nbsp; 史记</span></div>
+                        </th>
+                        <th>
+                            <div class="questionEntry mark-low" onclick="showQuestion4(11)"><span>11 &nbsp; 汉字发展</span>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="questionEntry mark-low" onclick="showQuestion4(2)"><span>2 &nbsp; 婉约</span></div>
+                        </th>
+                        <th>
+                            <div class="questionEntry mark-low" onclick="showQuestion4(7)"><span>7 &nbsp; 交情</span></div>
+                        </th>
+                        <th>
+                            <div class="questionEntry mark-middle" onclick="showQuestion4(12)">
+                                <span>12 &nbsp; 不要骄傲</span></div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="questionEntry mark-middle" onclick="showQuestion4(3)"><span>3 &nbsp; 贫穷</span>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="questionEntry mark-middle" onclick="showQuestion4(8)"><span>8 &nbsp; 论语</span>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="questionEntry mark-middle" onclick="showQuestion4(4)"><span>4 &nbsp; 花草</span>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="questionEntry mark-middle" onclick="showQuestion4(9)"><span>9 &nbsp; 典故猜词</span>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="questionEntry mark-high" onclick="showQuestion4(5)"><span>5 &nbsp; 考试</span>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="questionEntry mark-high" onclick="showQuestion4(10)"><span>10 &nbsp; 释义猜词</span>
+                            </div>
+                        </th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="questions" id="questions4">
+                <div class="question" id='q41' style="display: none;">
+                    <div class="questionBody">（关键词：文忠）（3分）宋代词人李清照曾经作《临江仙》词<br>
+                        欧阳公作《蝶恋花》，有“深深深几许”之句，予酷爱之。用其语作“庭院深深”数阕，其声即旧《临江仙》也。<br>
+                        庭院深深深几许？云窗雾阁常扃。柳梢梅萼渐分明。春归秣陵树，人老建康城。<br>
+                        感月吟风多少事，如今老去无成。谁怜憔悴更凋零。试灯无意思，踏雪没心情。<br>
+                        请问词小序中的欧阳公所作《蝶恋花》中的最后一句是什么？
+                    </div>
+                    <button class="btn btn-primary showAnswerBtn">显示答案</button>
+                    <div class="answer answer1">乱红飞过秋千去</div>
+                    <button class="btn btn-primary back" onclick="back();"><span
+                            class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回
+                    </button>
+                </div>
+                <div class="question" id='q42' style="display: none;">
+                    <div class="questionBody">（关键词：婉约）（3分）请根据题中所给的四个描述猜出诗人或者词人的身份<br>
+                        提示词---<br>
+                        北宋词人<br>
+                        父子双成<br>
+                        宰相<br>
+                        作品中“闹”字极佳
+                    </div>
+                    <button class="btn btn-primary showAnswerBtn">显示答案</button>
+                    <div class="answer answer2">晏殊</div>
+                    <button class="btn btn-primary back" onclick="back();"><span
+                            class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回
+                    </button>
+                </div>
+                <div class="question" id='q43' style="display: none;">
+                    <div class="questionBody">（关键词：贫穷）（5分）杜甫在《客至》一首诗中写道“盘飧市远无兼味，樽酒家贫只旧醅 ”<br>请问句中的“旧醅”指的是什么？（     ）<br>
+                        A.	陈年的清酒<br>
+                        B.	未渌的陈酒<br>
+                        C.	久置的浊酒<br>
+                        D.	剩余的残酒
+                    </div>
+                    <button class="btn btn-primary showAnswerBtn">显示答案</button>
+                    <div class="answer answer3">B</div>
+                    <button class="btn btn-primary back" onclick="back();"><span
+                            class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回
+                    </button>
+                </div>
+                <div class="question" id='q44' style="display: none;">
+                    <div class="questionBody">（关键词：花草）（5分）众所周知，王冕写过一首《墨梅》<br>
+                        “吾家洗砚池头树，朵朵（也做个个）花开淡墨痕。不要人夸颜色好，只留清气满乾坤。”<br>
+                        实际上跟王冕还写过一首与之对应的诗，诗中写道<br>
+                        “冰雪林中著此身，不同桃李混芳尘。忽然一夜清辉发，散作乾坤万里春。”<br>
+                        请问描写的是什么植物？</div>
+                    <button class="btn btn-primary showAnswerBtn">显示答案</button>
+                    <div class="answer answer4">白梅</div>
+                    <button class="btn btn-primary back" onclick="back();"><span
+                            class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回
+                    </button>
+                </div>
+                <div class="question" id='q45' style="display: none;">
+                    <div class="questionBody">（关键词：考试）（7分）秦观《临江仙》下阙<br>
+                        独倚危樯情悄悄，遥闻妃瑟泠泠。新声含尽古今情。曲终人不见，江上数峰青。<br>
+                        其中后两句“曲终人不见，江上数峰青”引用自唐代钱起的哪首诗？<br>
+                    </div>
+                    <button class="btn btn-primary showAnswerBtn">显示答案</button>
+                    <div class="answer answer5">省试湘灵鼓瑟</div>
+                    <button class="btn btn-primary back" onclick="back();"><span
+                            class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回
+                    </button>
+                </div>
+                <div class="question" id='q46' style="display: none;">
+                    <div class="questionBody">（关键词：史记）（3分）“虚左以待”最早指的是谁礼贤下士<br>
+                        A.	信陵君 B.平原君 C.孟尝君
+                    </div>
+                    <button class="btn btn-primary showAnswerBtn">显示答案</button>
+                    <div class="answer answer6">A</div>
+                    <button class="btn btn-primary back" onclick="back();"><span
+                            class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回
+                    </button>
+                </div>
+                <div class="question" id='q47' style="display: none;">
+                    <div class="questionBody">（关键词：交情）（3分）“忘年之交”原本形容哪两个人之间的交情？<br>
+                        A.	管仲和鲍叔牙 B.祢衡和孔融 C.程婴与公孙杵臼
+                    </div>
+                    <button class="btn btn-primary showAnswerBtn">显示答案</button>
+                    <div class="answer answer7">B</div>
+                    <button class="btn btn-primary back" onclick="back();"><span
+                            class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回
+                    </button>
+                </div>
+                <div class="question" id='q48' style="display: none;">
+                    <div class="questionBody">（关键词：论语）（5分）这个成语，出自《论语·颜渊》：“君子之德风，小人之德草。”意思是道德文教能感化人。请说出这个成语。
+                    </div>
+                    <button class="btn btn-primary showAnswerBtn">显示答案</button>
+                    <div class="answer answer8">风行草偃</div>
+                    <button class="btn btn-primary back" onclick="back();"><span
+                            class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回
+                    </button>
+                </div>
+                <div class="question" id='q49' style="display: none;">
+                    <div class="questionBody">（关键词：典故猜词）（5分）请看下列典故：战国时，赵国国君武灵王决心变革图强，见胡人身着窄袖短褂便服，骑着战马，边跑边射箭，行动迅疾，十分灵活，便决定向胡人学习，改革士兵服装，发展骑兵。不到一年功夫，赵国拥有一支强大的骑兵，经过南征北战，赵国成了当时有数的强国之一。请说出这个成语。</div>
+                    <button class="btn btn-primary showAnswerBtn">显示答案</button>
+                    <div class="answer answer9">胡服骑射</div>
+                    <button class="btn btn-primary back" onclick="back();"><span
+                            class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回
+                    </button>
+                </div>
+                <div class="question" id='q410' style="display: none;">
+                    <div class="questionBody">（关键词：释义猜词）（7分）这个成语的意思是，在两者之间犹豫不决又动摇不定，拿不定主意。这个成语的前两个字又可以写作“首施”、“踌躇”等，是双声连绵词。</div>
+                    <button class="btn btn-primary showAnswerBtn">显示答案</button>
+                    <div class="answer answer10">首鼠两端</div>
+                    <button class="btn btn-primary back" onclick="back();"><span
+                            class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回
+                    </button>
+                </div>
+                <div class="question" id='q411' style="display: none;">
+                    <div class="questionBody">（关键词：汉字发展）(3分)在几千年使用汉字的过程中，汉字的演变主要经历了五个阶段（   ）<br>
+                        A. 声、形、象、数、理<br>
+                        B. 形、声、象、理、数<br>
+                        C. 形、象、声、理、数<br>
+                        D. 声、象、形、理、数<br>
+                        E. 象、形、声、数、理
+                    </div>
+                    <button class="btn btn-primary showAnswerBtn">显示答案</button>
+                    <div class="answer answer11">A</div>
+                    <button class="btn btn-primary back" onclick="back();"><span
+                            class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回
+                    </button>
+                </div>
+                <div class="question" id='q412' style="display: none;">
+                    <div class="questionBody">（关键词：不要骄傲）（5分）表示身居高位的人要戒骄的词（   ）<br>
+                        A. 亢龙<br>
+                        B. 持满<br>
+                        C. 据鼎<br>
+                        D. 青紫
+                    </div>
+                    <button class="btn btn-primary showAnswerBtn">显示答案</button>
+                    <div class="answer answer12">A</div>
+                    <button class="btn btn-primary back" onclick="back();"><span
+                            class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!--排名-->
+        <div id="rank" style="display: none; margin: auto;">
+            <table class="table table-bordered table-hover">
+                <caption class="table-title">积分榜</caption>
+                <thead style="font-size: 25px;">
+                <tr>
+                    <th>小组</th>
+                    <th>第一轮</th>
+                    <th>第二轮</th>
+                    <th>亲友助阵</th>
+                    <th>第三轮</th>
+                    <th>第四轮</th>
+                    <th>总积分</th>
+                </tr>
+                </thead>
+                <tbody id="rank-body" style="font-size: 30px; font-weight: bold;">
+
+                </tbody>
+            </table>
         </div>
     </div>
-    <audio src="audio/ready.mp3" controls="controls" id="ready" onended="start();$('#stop').prop('disabled',false);" style="display: none;">
-    </audio>
-    <audio src="audio/runningTime.wav" controls="controls" id="runningTime" onended="this.play();" style="display: none;">
-    </audio>
-    <audio src="audio/timesUp.wav" controls="controls" id="timesUp" style="display: none;">
-    </audio>
-    <audio src="audio/responderSuccess.wav" controls="controls" id="getResponder" style="visibility: hidden; display: none;">
-    </audio>
+</div>
+<audio src="audio/ready.mp3" controls="controls" id="ready" onended="start();$('#stop').prop('disabled',false);"
+       style="display: none;">
+</audio>
+<audio src="audio/runningTime.wav" controls="controls" id="runningTime" onended="this.play();" style="display: none;">
+</audio>
+<audio src="audio/timesUp.wav" controls="controls" id="timesUp" style="display: none;">
+</audio>
+<audio src="audio/responderSuccess.wav" controls="controls" id="getResponder"
+       style="visibility: hidden; display: none;">
+</audio>
 <script>
     $(function () {
         $(".showAnswerBtn").click(function () {
-                    $(this).css("display","none");
-                    $(this).next(".answer").css("display","block");
-                });
+            $(this).css("display", "none");
+            $(this).next(".answer").css("display", "block");
+        });
         $(".questionEntry").click(function () {
-            $(this).css("background-color","grey").css("box-shadow","inset 0px 0px 9px black");
+            $(this).css("background-color", "grey").css("box-shadow", "inset 0px 0px 9px black");
         });
 
     })
 </script>
 </body>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </body>
+</body>
 </html>

@@ -685,7 +685,14 @@ $client_worker->onConnect=function ($connection)use(&$clientView){
     }
 };
 $client_worker->onMessage=function ($connection,$data)use(&$responder,$client_worker){
+    $raw_data = $data;
     $data=json_decode($data,true);
+    if (isset($data['cmd']) && $data['cmd'] == 'set_tablet_question') {
+        foreach ($client_worker->connections as $connection) {
+            $connection->send($raw_data);
+        }
+        return;
+    }
     if (!$responder&&$data['act']=="responder"){
         $responder=1;
         echo "get responder\n";

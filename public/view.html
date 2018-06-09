@@ -22,6 +22,7 @@
                 if (data.showChengyu==1){
                     $("#responder").css("display","none");
                     $("#showChengyu").css("display","block");
+                    $("#question").html("");
                 }
                 if (data.responderSuccess==1) {
                     $("#responderArea").removeClass("responder").addClass("responderSuccess").html("抢答成功");
@@ -30,9 +31,14 @@
                 if (data.resetResponder==1){
                     $("#responderArea").addClass("responder").removeClass("responderSuccess").html("点击抢答");
                 }
-                if (data.chengyu!=="")              //成语由workerman提供
+                if (data.chengyu !== undefined)              //成语由workerman提供
                 {
-                    changeChengyu(data.chengyu);
+                    $("#chengyu").html(data.chengyu);
+                    $("#question").html("");
+                }
+                if (data.cmd === 'set_tablet_question' || data.cmd === 'set_question') {
+                    $('#chengyu').html('');
+                    $("#question").html('' + data.question);
                 }
                 if (data.fail!==undefined){
                     $("#fail").html(data.fail);
@@ -90,6 +96,13 @@
             text-align: center;
             padding-top: 85px;
         }
+        .questionContainer span {
+            position: absolute;
+            top: 100px;
+            left: 400px;
+            width: 900px;
+            font-size: 40px;
+        }
     </style>
 </head>
 <body>
@@ -98,6 +111,9 @@
         <h1 id="chengyu">
             欢迎参赛
         </h1>
+    </div>
+    <div class="questionContainer">
+        <span id="question"></span>
     </div>
 </div>
 <script>

@@ -174,6 +174,21 @@ function resetCountDown() {
 function showQuestion(q) {
     $(".entrance").css("display", "none");
     $("#q" + q).css("display", "block");
+    data = {
+        cmd: 'set_tablet_question',
+        question: $("#q" + q + ' .questionBody').html()
+    };
+    ws.send(JSON.stringify(data));
+}
+
+function showQuestion4(q) {
+    $(".entrance").css("display", "none");
+    $("#q4" + q).css("display", "block");
+    data = {
+        cmd: 'set_tablet_question',
+        question: $("#q4" + q + ' .questionBody').html()
+    };
+    ws.send(JSON.stringify(data));
 }
 
 function back() {
