@@ -43,28 +43,6 @@ ws.onmessage = function (e) {
         timer_cy = !timer_cy;
         if ($("#clock").css('display') === 'block')
             Clock();
-    } else if (data.cmd === 'set_extra_questions' || data.cmd === 'set_part4_questions') {
-        let node = null;
-        if (data.cmd === 'set_extra_questions')
-            node = $("#questions");
-        else
-            node = $("#questions4");
-        node.html('');
-        for (q in data.data) {
-            i = parseInt(q) + 1;
-            node.append(
-                '<div class="question" id="q' + i + '" style="display: none;">\n' +
-                '<div class="questionBody">' + data.data[i-1][0] + '</div>\n' +
-                '<button class="btn btn-primary showAnswerBtn"">显示答案</button>\n' +
-                '<div class="answer answer'+i+'">' + data.data[i-1][1] + '</div>\n' +
-                '<button class="btn btn-primary back" onclick="back();" >' +
-                '<span class="glyphicon glyphicon-menu-left"></span>&nbsp; 返回</button>\n' +
-                '</div>');
-        }
-        $(".showAnswerBtn").click(function () {
-            $(this).css("display","none");
-            $(this).next(".answer").css("display","block");
-        });
     }
 };
 
