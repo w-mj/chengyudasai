@@ -10,6 +10,7 @@ require 'vendor/autoload.php';
 #require_once __DIR__ . '/Workerman/Autoloader.php';
 #require_once __DIR__.'/mysql/src/Connection.php';
 
+$ip = '127.0.0.1';
 $chengyu1=array(            //存储成语的数组
     '字面意思是只要吩咐便听从。形容对某个人的绝对服从，不敢有半点违抗。',
     '字面意思是因理亏而说不出一个词来应对。',
@@ -670,24 +671,42 @@ $db = new Workerman\MySQL\Connection('localhost', '3306', 'chengyu', 'chengyu', 
 $responder=0;
 
 //客户端显示状态
-$clientView['page']=1;//1为显示成语，2为显示抢答器
+$clientView['page']=1;//1为显示成语，2为显示抢答器, 3为显示题目
 $clientView['chengyu']="欢迎参赛";
+$clientView['question'] = '欢迎参赛';
+$clientView['answer'] = '';
 
 // 创建一个Worker监听端口,使用websocket协议通讯
-$client_worker = new Workerman\Worker("websocket://127.0.0.1:1235");//处理与客户端的长连接
+$client_worker = new Workerman\Worker("websocket://$ip:1235");//处理与客户端的长连接
 $client_worker->count=1;                            //启动1个进程
 $client_worker->onConnect=function ($connection)use(&$clientView){
     echo "client connection success!\n";
     if ($clientView['page']==2){
         $connection->send(json_encode(array("showResponder"=>1)));
-    }else{
+    }else if($clientView['page'] == 1) {
         $connection->send(json_encode(array('chengyu'=>$clientView['chengyu'])));
+    } else if ($clientView['page'] == 3) {
+        $connection->send(json_encode(array('cmd'=>'set_question', 'question' => $clientView['question'])));
+        $connection->send(json_encode(array('cmd'=>'set_tablet_question', 'question' => $clientView['question'])));
+    } else if ($clientView['page'] == 4) {
+        $connection->send(json_encode(array('cmd'=>'set_question', 'question' => $clientView['question'])));
+        $connection->send(json_encode(array('cmd'=>'set_tablet_question', 'question' => $clientView['question'])));
+        $connection->send(json_encode(array('cmd'=>'set_answer', 'answer' => $clientView['answer'])));
+        $connection->send(json_encode(array('cmd'=>'set_tablet_answer', 'answer' => $clientView['answer'])));
     }
 };
 $client_worker->onMessage=function ($connection,$data)use(&$responder,$client_worker){
     $raw_data = $data;
     $data=json_decode($data,true);
     if (isset($data['cmd']) && $data['cmd'] == 'set_tablet_question') {
+        $clientView['page'] = 3;
+        foreach ($client_worker->connections as $connection) {
+            $connection->send($raw_data);
+        }
+        return;
+    }
+    if (isset($data['cmd']) && $data['cmd'] == 'set_tablet_answer') {
+        $clientView['page'] = 4;
         foreach ($client_worker->connections as $connection) {
             $connection->send($raw_data);
         }
@@ -718,6 +737,7 @@ $client_worker->onWorkerStart=function ($client_worker) use ($chengyu1,$chengyu2
                 $response['chengyu']="欢迎参赛";
                 echo "reset\n";
                 $clientView['chengyu']="欢迎参赛";
+                $clientView['page'] = 1;
                 foreach ($client_worker->connections as $connection) {
                     $connection->send(json_encode(array("chengyu"=>"欢迎参赛")));
                 }
@@ -729,12 +749,6 @@ $client_worker->onWorkerStart=function ($client_worker) use ($chengyu1,$chengyu2
         if (isset($data['cmd'])) {
             foreach ($client_worker->connections as $c)
                 $c->send($raw_data);
-            if ($data['cmd'] == 'show_page' && $data['page'] == 'friend')
-                foreach ($client_worker->connections as $c)
-                    $c->send(json_encode(array('cmd'=>'set_extra_questions', 'data'=>$chengyue)));
-            else if ($data['cmd'] == 'show_page' && $data['page'] == 'part4')
-                foreach ($client_worker->connections as $c)
-                    $c->send(json_encode(array('cmd'=>'set_extra_questions', 'data'=>$chengyu4)));
             return;
         }
 
@@ -759,15 +773,19 @@ $client_worker->onWorkerStart=function ($client_worker) use ($chengyu1,$chengyu2
         );
 
         if ($data['part'] == 'part1') {  // 第一关
-            $game = (int)$data['game'];
-            $group = (int)$data['group'];
+            $game = (int)$data['game'] ;
+            $group = (int)$data['group'] ;
+            $clientView['answer'] = $answer1[$group - 1 + ($game - 1) * 12];
+            $clientView['question'] = $chengyu1[$group - 1 + ($game - 1) * 12];
             if (isset($data['act']) && $data['act'] == 'set_answer') {
-                $data = json_encode(array('cmd' => 'set_answer', "answer" => $answer1[$group + ($game - 1) * 12],
-                    "msg" => "答案$game, $group:" . $answer1[$group + ($game - 1) * 12]));
+                $clientView['page'] = 4;
+                $data = json_encode(array('cmd' => 'set_answer', "answer" => $clientView['answer'],
+                    "msg" => "答案$game, $group:" . $clientView['answer']));
             } else {
-                $data = json_encode(array('cmd' => 'set_question', "question" => $chengyu1[$group + ($game - 1) * 12],
-                    "msg" => "题目$game, $group:" . $chengyu1[$group + ($game - 1) * 12]));
-                }
+                $clientView['page'] = 3;
+                $data = json_encode(array('cmd' => 'set_question', "question" => $clientView['question'],
+                    "msg" => "题目$game, $group:" . $clientView['question']));
+            }
 
             $controller_connection->send($data);
             foreach ($client_worker->connections as $connection) {

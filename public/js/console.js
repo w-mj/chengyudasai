@@ -62,6 +62,7 @@ $(".part4-result").children(".result").children("label").children("input").click
 function home() {
     part = 'home';
     showPage('index');
+    resetClientView();
     $("ul li").removeClass("active");
     $("#nav-home").addClass("active");
 
@@ -119,6 +120,7 @@ function part2() {
  */
 function extraPart() {
     part = 'extraPart';
+    resetClientView();
     showPage('friend');
     $("ul li").removeClass("active");
     $("#nav-extraPart").addClass("active");
@@ -167,6 +169,8 @@ function part4() {
 let out_group = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 let first = 0;
 function part1Next() {
+    $("#part1start").attr('disabled', false);
+    $('#part1next').attr('disabled', true);
     let group = $("#part1-group").val();
     let game = $("#part1-game").val();
     group = parseInt(group);
@@ -192,6 +196,9 @@ function part1Next() {
     ws.send('{"cmd":"clear_answer"}')
 }
 function part1Answer() {
+    $('#part1answer').attr('disabled', 'true');
+    $('#part1start').attr('disabled', true);
+    $('#part1next').attr('disabled', false);
     let group = $("#part1-group").val();
     let game = $("#part1-game").val();
     let data = {
@@ -201,6 +208,7 @@ function part1Answer() {
         group: group
     };
     ws.send(JSON.stringify(data));
+    stopTimer();
 }
 function part1Wrong() {
     let group = $("#part1-group").val();
@@ -211,6 +219,8 @@ function part1Wrong() {
 }
 
 function part1Start() {
+    $('#part1start').attr('disabled', true);
+    $('#part1answer').attr('disabled', false);
     showPage('timer');
     resetTimer(20);
     startTimer();
@@ -244,21 +254,24 @@ function Part2End() {
     ws.send(JSON.stringify(data));
 
     select.attr("disabled",false);
-    $("#part1-btn").children("button").attr("disabled",true);
-    $("#part1-end").attr("disabled",true);
-    $("#part1-start").attr("disabled",false);
+    $("#part2-btn").children("button").attr("disabled",true);
+    $("#part2-end").attr("disabled",true);
+    $("#part2-start").attr("disabled",false);
 }
 
 /** 第二关 开始计时*/
 function Part2Start() {
     resetTimer(100);
     startTimer();
+    $("#part2-show-question").attr('disabled', false);
+    $('#part2-start').attr('disabled', true);
 }
 
 /**
  * 第二关，切换成语
  */
 function Part2Question(){
+    $('#part2-show-question').attr('disabled', true);
     var group=$("#part2-group").val();
     var data={
         part:"part2",
@@ -279,10 +292,18 @@ function part3Question() {
     resetTimer(35);
     showPage('timer');
 }
-
+let part3running = false;
 function part3Time() {
-    resetTimer(35);
-    startTimer();
+    if (part3running) {
+        stopTimer();
+        $("#part3timer").text('开始计时');
+        part3running = false;
+    } else {
+        resetTimer(35);
+        startTimer();
+        $("#part3timer").text('停止计时');
+        part3running = true;
+    }
 }
 
 
@@ -336,7 +357,7 @@ function extraPartSubmit(){
             $.post("save.php",{
                 group:group,
                 part:"extrapart",
-                score:1
+                score:2
             },function (data) {
 
                 data=eval("("+data+")");

@@ -8,7 +8,6 @@
     <link href="css/bootstrap.css" rel="stylesheet">
     <script>
         $(function () {
-            // 服务端ip为192.168.1.101
             ws = new WebSocket("ws://127.0.0.1:1235");
             ws.onopen = function() {
 
@@ -35,10 +34,15 @@
                 {
                     $("#chengyu").html(data.chengyu);
                     $("#question").html("");
+                    $("#answer").html("");
                 }
                 if (data.cmd === 'set_tablet_question' || data.cmd === 'set_question') {
                     $('#chengyu').html('');
                     $("#question").html('' + data.question);
+                    $("#answer").html('');
+                }
+                if (data.cmd === 'set_answer' || data.cmd === 'set_tablet_answer') {
+                    $("#answer").html(data.answer);
                 }
                 if (data.fail!==undefined){
                     $("#fail").html(data.fail);
@@ -99,10 +103,22 @@
         .questionContainer span {
             position: absolute;
             top: 100px;
-            left: 400px;
+            left: 20px;
             width: 900px;
             font-size: 40px;
         }
+        red {
+            color: red;
+        }
+
+        #answer{
+            margin: auto;
+            float: left;
+            padding-top: 20px;
+            padding-right: 300px;
+            font-size: 30px;
+            color: red;
+            }
     </style>
 </head>
 <body>
@@ -114,6 +130,9 @@
     </div>
     <div class="questionContainer">
         <span id="question"></span>
+    </div>
+    <div class="answerContainer">
+        <span id="answer"></span>
     </div>
 </div>
 <script>

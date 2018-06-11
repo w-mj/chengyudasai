@@ -111,10 +111,10 @@
                 </select>
                 </div>
                 <div class="col-md-6 btn-group">
-                    <div class="btn btn-default" onclick="part1Next();"> 下一题 </div>
-                    <div class="btn btn-info" onclick="part1Answer();"> 显示答案 </div>
-                    <div class="btn btn-danger" onclick="part1Wrong();"> 淘汰 </div>
-                    <div class="btn btn-default" onclick="part1Start();"> 显示计时器并开始20s计时 </div>
+                    <div class="btn btn-default" onclick="part1Next();" id="part1next"> 下一题 </div>
+                    <div class="btn btn-info" onclick="part1Answer();" id="part1answer" disabled="true"> 显示答案 </div>
+                    <div class="btn btn-danger" onclick="part1Wrong();" id="part1wrong" disabled="true"> 淘汰 </div>
+                    <div class="btn btn-default" onclick="part1Start();" id="part1start" disabled="true"> 显示计时器并开始20s计时 </div>
 
                 </div>
             </div>
@@ -141,7 +141,7 @@
                                 <option value="extraGroup">加赛</option>
                             </select>
 
-                            <button class="btn" onclick="Part2Question();" id="part2-show-question"><span
+                            <button class="btn" onclick="Part2Question();" id="part2-show-question" disabled="disabled"><span
                                     class="glyphicon glyphicon-play"></span>&nbsp;显示题目
                             </button>
                             <button class="btn" onclick="Part2Start();" id="part2-start"><span
@@ -247,7 +247,7 @@
             <!-- 第三轮控制页面内容 -->
             <div id="part3" style="display: none;">
                 <div class="btn btn-default" onclick="part3Question();">出题</div>
-                <div class="btn btn-default" onclick="part3Time();">计时</div>
+                <div class="btn btn-default" onclick="part3Time();" id="part3timer">计时</div>
                 <!--<div class="btn btn-default" onclick="part3Delay();">延时</div>-->
             </div>
 
