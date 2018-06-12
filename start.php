@@ -922,7 +922,15 @@ $client_worker->onWorkerStart=function ($client_worker) use ($chengyu1,$chengyu2
                 $controller_connection->send(json_encode($response));
                 return;
             }
-
+            if ($data['act']=='set-part4-board') {
+                $group1_score = $db->select('part4')->from('sum')->where('name="'.$data['group1'].'"')->single();
+                $group2_score = $db->select('part4')->from('sum')->where('name="'.$data['group2'].'"')->single();
+                foreach ($client_worker->connections as $connection) {
+                    $connection->send(json_encode(array("cmd"=>'set-part4-board', 'part4_group1'=>$data['group1'],
+                        'part4_group2'=>$data['group2'], 'part4_group1_score'=>$group1_score, 'part4_group2_score'=>$group2_score)));
+                }
+                $controller_connection->send(json_encode(array('msg'=>'显示第四关记分板')));
+            }
         }
 
     };

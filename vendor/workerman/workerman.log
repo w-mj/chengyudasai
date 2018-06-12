@@ -83,3 +83,48 @@ Stack trace:
 #10 D:\xampp\htdocs\chengyudasai\start.php(1099): Workerman\Worker::runAll()
 #11 {main}
 2018-06-06 08:24:23 pid:1 Worker process terminated
+2018-06-12 10:59:36 pid:1 PDOException: SQL:SELECT part4 WHERE name=:group8 SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE name=?' at line 1 in D:\xampp\htdocs\chengyudasai\vendor\workerman\mysql\src\Connection.php:1772
+Stack trace:
+#0 D:\xampp\htdocs\chengyudasai\vendor\workerman\mysql\src\Connection.php(1924): Workerman\MySQL\Connection->execute('SELECT part4 WH...', Array)
+#1 D:\xampp\htdocs\chengyudasai\start.php(926): Workerman\MySQL\Connection->single()
+#2 [internal function]: {closure}(Object(Workerman\Connection\TcpConnection), Array)
+#3 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Connection\TcpConnection.php(645): call_user_func(Object(Closure), Object(Workerman\Connection\TcpConnection), '{"part":"part4"...')
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #28)
+#5 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Events\Select.php(289): call_user_func_array(Array, Array)
+#6 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Worker.php(2230): Workerman\Events\Select->loop()
+#7 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Worker.php(1221): Workerman\Worker->run()
+#8 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Worker.php(1164): Workerman\Worker::forkWorkersForWindows()
+#9 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Worker.php(478): Workerman\Worker::forkWorkers()
+#10 D:\xampp\htdocs\chengyudasai\start.php(941): Workerman\Worker::runAll()
+#11 {main}
+2018-06-12 10:59:36 pid:1 Worker process terminated
+2018-06-12 11:01:49 pid:1 PDOException: SQL:SELECT part4 WHERE name="" SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE name=""' at line 1 in D:\xampp\htdocs\chengyudasai\vendor\workerman\mysql\src\Connection.php:1772
+Stack trace:
+#0 D:\xampp\htdocs\chengyudasai\vendor\workerman\mysql\src\Connection.php(1924): Workerman\MySQL\Connection->execute('SELECT part4 WH...', Array)
+#1 D:\xampp\htdocs\chengyudasai\start.php(926): Workerman\MySQL\Connection->single()
+#2 [internal function]: {closure}(Object(Workerman\Connection\TcpConnection), Array)
+#3 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Connection\TcpConnection.php(645): call_user_func(Object(Closure), Object(Workerman\Connection\TcpConnection), '{"part":"part4"...')
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #27)
+#5 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Events\Select.php(289): call_user_func_array(Array, Array)
+#6 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Worker.php(2230): Workerman\Events\Select->loop()
+#7 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Worker.php(1221): Workerman\Worker->run()
+#8 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Worker.php(1164): Workerman\Worker::forkWorkersForWindows()
+#9 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Worker.php(478): Workerman\Worker::forkWorkers()
+#10 D:\xampp\htdocs\chengyudasai\start.php(941): Workerman\Worker::runAll()
+#11 {main}
+2018-06-12 11:01:49 pid:1 Worker process terminated
+2018-06-12 11:02:55 pid:1 PDOException: SQL:SELECT part4 WHERE name="group7" SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE name="group7"' at line 1 in D:\xampp\htdocs\chengyudasai\vendor\workerman\mysql\src\Connection.php:1772
+Stack trace:
+#0 D:\xampp\htdocs\chengyudasai\vendor\workerman\mysql\src\Connection.php(1924): Workerman\MySQL\Connection->execute('SELECT part4 WH...', Array)
+#1 D:\xampp\htdocs\chengyudasai\start.php(926): Workerman\MySQL\Connection->single()
+#2 [internal function]: {closure}(Object(Workerman\Connection\TcpConnection), Array)
+#3 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Connection\TcpConnection.php(645): call_user_func(Object(Closure), Object(Workerman\Connection\TcpConnection), '{"part":"part4"...')
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #24)
+#5 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Events\Select.php(289): call_user_func_array(Array, Array)
+#6 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Worker.php(2230): Workerman\Events\Select->loop()
+#7 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Worker.php(1221): Workerman\Worker->run()
+#8 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Worker.php(1164): Workerman\Worker::forkWorkersForWindows()
+#9 D:\xampp\htdocs\chengyudasai\vendor\workerman\workerman\Worker.php(478): Workerman\Worker::forkWorkers()
+#10 D:\xampp\htdocs\chengyudasai\start.php(941): Workerman\Worker::runAll()
+#11 {main}
+2018-06-12 11:02:55 pid:1 Worker process terminated

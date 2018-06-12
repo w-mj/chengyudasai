@@ -310,12 +310,18 @@ function part3Time() {
 /**
  * 第四关，提交成绩
  */
-function Part4Submit(mark) {
-    var groupOneSelect=$("select[name=part4-groupOne]");
+function Part4Submit(which, mark) {
+    let group = null;
+    if (which === 1) {
+        var groupOneSelect=$("select[name=part4-groupOne]");
+        group=groupOneSelect.val();
+    } else {
+        let groupTwoSelect = $("select[name=part4-groupTwo]");
+        group = groupTwoSelect.val();
+    }
 
-    var groupOne=groupOneSelect.val();
 
-    if (groupOne==""){
+    if (group==""){
         $("#alrt").html("请选择一个组");
         $("#alertModal").modal('show');
         return;
@@ -324,7 +330,7 @@ function Part4Submit(mark) {
     var success=1;
     $.post("save.php",{
         part:"part4",
-        group:groupOne,
+        group:group,
         score:mark
     },function (data) {
         console.log(data);
@@ -337,12 +343,6 @@ function Part4Submit(mark) {
             success=0;
         }
     });
-
-    if (success){
-        groupOneSelect.children("option").prop("selected",false);
-        groupOneSelect.children(".part4-select-default").prop("selected",true);
-        $("input[type=checkbox]").prop("checked",false);
-    }
 }
 
 /**
@@ -451,4 +451,22 @@ function resetClientView(){
         reset:"client"
     };
     ws.send(JSON.stringify(data));
+}
+
+function showPart4Board() {
+    let group1=$("select[name=part4-groupOne]").val();
+    let group2=$("select[name=part4-groupTwo]").val();
+    if (group1=="" || group2 == ""){
+        $("#alrt").html("请选择一个组");
+        $("#alertModal").modal('show');
+        return;
+    }
+    data = {
+        part: 'part4',
+        act: 'set-part4-board',
+        group1: group1,
+        group2: group2
+    };
+    ws.send(JSON.stringify(data));
+    showPage('part4-board');
 }

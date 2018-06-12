@@ -1,5 +1,6 @@
 let timer_cy = true;
 
+let chineseNum = ['零', '一', '二', '三', '四', '五','六','七','八','九','十','十一','十二'];
 // 服务端ip为127.0.0.1
 ws = new WebSocket("ws://127.0.0.1:1235");
 ws.onopen = function () {
@@ -34,6 +35,7 @@ ws.onmessage = function (e) {
         }
         else if (data.page === 'part4') showPart4();
         else if (data.page === 'board') Rank();
+        else if (data.page === "part4-board") showPart4Board();
     } else if (data.cmd === 'start_timer') startCountDown();
     else if (data.cmd === 'stop_timer') stopCountDown();
     else if (data.cmd === 'reset_timer') {
@@ -43,6 +45,11 @@ ws.onmessage = function (e) {
         timer_cy = !timer_cy;
         if ($("#clock").css('display') === 'block')
             Clock();
+    } else if (data.cmd === 'set-part4-board') {
+        $("#part4-group1").text('第' + chineseNum[parseInt(data.part4_group1.slice(5, data.part4_group1.length))] + '组');
+        $("#part4-group1-score").text(data.part4_group1_score);
+        $("#part4-group2").text('第' + chineseNum[parseInt(data.part4_group2.slice(5, data.part4_group2.length))] + '组');
+        $("#part4-group2-score").text(data.part4_group2_score);
     }
 };
 
@@ -92,10 +99,17 @@ function showPart4() {
     $("#rank").css("display", "none");
     $('#chengyubox').css('display', 'none');
     $('#part4').show();
+    $('#part4-board').hide();
+    $('#part4-entrance').show();
 
     $("#nav-clock").removeClass("chosen").addClass("notChosen");
     $("#nav-friendsHelp").addClass("chosen");
     $("#nav-rank").removeClass("chosen");
+}
+
+function showPart4Board() {
+    $("#part4-entrance").hide();
+    $("#part4-board").show();
 }
 
 function Rank() {

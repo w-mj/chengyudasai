@@ -163,27 +163,7 @@
                                     disabled="disabled"><span class="glyphicon glyphicon-ok"></span>&nbsp;正确
                             </button>
                         </div>
-
                     </div>
-                    <!--<div class="col-sm-4 containBox">-->
-                        <!--<div class="panel-group" id="part2-accordion">-->
-                            <!--<div class="panel panel-default">-->
-                                <!--<div class="panel-heading">-->
-                                    <!--<h4 class="panel-title">-->
-                                        <!--<a data-toggle="collapse" data-parent="#part2-accordion"-->
-                                           <!--href="#part2-collapseOne">-->
-                                            <!--查看服务器返回信息-->
-                                        <!--</a>-->
-                                    <!--</h4>-->
-                                <!--</div>-->
-                                <!--<div id="part2-collapseOne" class="panel-collapse collapse in">-->
-                                    <!--<div class="panel-body" id="part2-msg">-->
-
-                                    <!--</div>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
                 </div>
             </div>
 
@@ -267,6 +247,9 @@
                             <div class="col-sm-offset-6 col-sm-2">
                                 <button class="btn btn-primary" id="showChengyu" onclick="showChengyu();">&nbsp;显示成语&nbsp;</button>
                             </div>
+                            <div class="col-sm-offset-6 col-sm-2">
+                                <button class="btn btn-primary" id="showBoard" onclick="showPart4Board()">&nbsp;显示记分板&nbsp;</button>
+                            </div>
                         </div>
                         <div class="row" style="margin-bottom: 10px;">
                             <div class="col-sm-offset-4 col-sm-3">
@@ -292,18 +275,46 @@
                                     <option value="group12">第十二组</option>
                                 </select>
                             </div>
+                            <div class="col-sm-offset-1 col-sm-3">
+                                <select class="form-control pull-left" name="part4-groupTwo" id="part4-groupTwo">
+                                    <option value="" class="part4-select-default">选择组</option>
+                                    <option value="group1">第一组</option>
+                                    <option value="group2">第二组</option>
+                                    <option value="group3">第三组</option>
+                                    <option value="group4">第四组</option>
+                                    <option value="group5">第五组</option>
+                                    <option value="group6">第六组</option>
+                                    <option value="group7">第七组</option>
+                                    <option value="group8">第八组</option>
+                                    <option value="group9">第九组</option>
+                                    <option value="group10">第十组</option>
+                                    <option value="group11">第十一组</option>
+                                    <option value="group12">第十二组</option>
+                                </select>
+                            </div>
                         </div>
 
                         <div class="row" style="text-align: center;">
-                            <div class="btn-group" style="margin-top: 10px;">
-                                <button class="btn btn-primary" onclick="Part4Submit(3);" class="part4-submit"><span
-                                        class="glyphicon glyphicon-hdd"></span>&nbsp;加三分
+                            <div class="btn-group-vertical col-sm-offset-1 col-sm-3" style="margin-top: 10px;">
+                                <button class="btn btn-primary" onclick="Part4Submit(1, 3);" class="part4-submit"><span
+                                        class="glyphicon"></span>&nbsp;加三分
                                 </button>
-                                <button class="btn btn-primary" onclick="Part4Submit(5);" class="part4-submit"><span
-                                        class="glyphicon glyphicon-hdd"></span>&nbsp;加五分
+                                <button class="btn btn-primary" onclick="Part4Submit(1, 5);" class="part4-submit"><span
+                                        class="glyphicon"></span>&nbsp;加五分
                                 </button>
-                                <button class="btn btn-primary" onclick="Part4Submit(7);" class="part4-submit"><span
-                                        class="glyphicon glyphicon-hdd"></span>&nbsp;加七分
+                                <button class="btn btn-primary" onclick="Part4Submit(1, 7);" class="part4-submit"><span
+                                        class="glyphicon"></span>&nbsp;加七分
+                                </button>
+                            </div>
+                            <div class="btn-group-vertical col-sm-offset-1 col-sm-3" style="margin-top: 10px;">
+                                <button class="btn btn-primary" onclick="Part4Submit(2, 3);" class="part4-submit"><span
+                                        class="glyphicon"></span>&nbsp;加三分
+                                </button>
+                                <button class="btn btn-primary" onclick="Part4Submit(2, 5);" class="part4-submit"><span
+                                        class="glyphicon"></span>&nbsp;加五分
+                                </button>
+                                <button class="btn btn-primary" onclick="Part4Submit(2, 7);" class="part4-submit"><span
+                                        class="glyphicon"></span>&nbsp;加七分
                                 </button>
                             </div>
                         </div>

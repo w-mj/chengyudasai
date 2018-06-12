@@ -163,3 +163,13 @@ tbody img{
     margin-top: 50px;
     float: right;
 }
+
+.score-board {
+    text-align: center;
+    padding-left: 400px;
+    padding-top: 270px;
+}
+
+.part4-group-score {
+    font-size: 6em;
+}
