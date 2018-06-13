@@ -470,3 +470,11 @@ function showPart4Board() {
     ws.send(JSON.stringify(data));
     showPage('part4-board');
 }
+
+function showPart4Extra(q) {
+    data = {
+        cmd: 'show_extra_question',
+        data: q+12
+    };
+    ws.send(JSON.stringify(data))
+}

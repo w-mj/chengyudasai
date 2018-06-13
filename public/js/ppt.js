@@ -50,6 +50,8 @@ ws.onmessage = function (e) {
         $("#part4-group1-score").text(data.part4_group1_score);
         $("#part4-group2").text('第' + chineseNum[parseInt(data.part4_group2.slice(5, data.part4_group2.length))] + '组');
         $("#part4-group2-score").text(data.part4_group2_score);
+    } else if (data.cmd === 'show_extra_question') {
+        showQuestion4(data.data)
     }
 };
 
@@ -229,3 +231,4 @@ function clock1min40sec() {
     clockMode = 100;
     $("#countDown").html("01:40").removeClass("countDownFinish").addClass("countDown");
 }
+

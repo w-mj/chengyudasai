@@ -10,7 +10,7 @@ require 'vendor/autoload.php';
 #require_once __DIR__ . '/Workerman/Autoloader.php';
 #require_once __DIR__.'/mysql/src/Connection.php';
 
-$ip = '127.0.0.1';
+$ip = '192.168.123.1';
 $chengyu1=array(            //存储成语的数组
     '字面意思是只要吩咐便听从。形容对某个人的绝对服从，不敢有半点违抗。',
     '字面意思是因理亏而说不出一个词来应对。',
